@@ -20,7 +20,7 @@ const GenresBox = styled.div({
     flexDirection: "column",
     padding: {y: "20px" },
     width: "15vw",
-    height: "80vh",
+    minHeight: "80vh",
     fontSize: "16px",
     boxSizing: "border-box",
     backgroundColor: "lightgrey",

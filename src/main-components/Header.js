@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import { styled } from '@glitz/react';
 import CookieService from "../services/CookieService";
 //let cookie = browser.cookies.onChanged.addListener(CookieService.get("access_token"));
 
 export default function Header(props){
-    //const [isAuthed, setIsAuthed] = useState(props.isAuthed);
+//const [loggedIn, setLoggedIn] = useState(props.isAuthed);
     //const [redirect, setRedirect] = useState(false);
 
     // useEffect(() => {
@@ -14,12 +14,15 @@ export default function Header(props){
 
     function handleLogout(){
         CookieService.remove("access_token");
+        //setLoggedIn(false;)
     }
 
+    // if (!loggedIn){
+    //     return <Redirect to="/" />
+    // }
 
 
     return(
-
         <Content>
             <HomeBox>
                 <Link to="/">
@@ -29,20 +32,19 @@ export default function Header(props){
             <LogoBox>
                 <h1>Logo</h1>
             </LogoBox>
-            <NavBox>                
-                
-                    <NavReviews>
-                    {props.isAuthed ?
-                        <Link to="my-reviews">
-                            <p>My Reviews</p>
-                        </Link>
-                        :
-                        null
-                    }
-                        <Link to="create-review">
-                            <p>Create review</p>
-                        </Link>
-                    </NavReviews>
+            <NavBox>                   
+            <NavReviews>
+            {props.isAuthed ?
+                <Link to="my-reviews">
+                    <p>My Reviews</p>
+                </Link>
+                :
+                null
+            }
+                <Link to="create-review">
+                    <p>Create review</p>
+                </Link>
+            </NavReviews>
                 {props.isAuthed ? 
                     <button onClick={handleLogout}>
                         Logout

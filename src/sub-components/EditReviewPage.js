@@ -5,7 +5,8 @@ import {Link} from "react-router-dom";
 import CookieService from "../services/CookieService";
 import DropDown from "../shared/DropDown";
 
-export default function CreateReviewPage(props){
+export default function EditReviewPage(props){
+    console.log(props.review);
     const [games, setGames] = useState([]);
     //const [game, setGame] = useState({});
     //const [dropDownValue, setDropDownValue] = useState("");

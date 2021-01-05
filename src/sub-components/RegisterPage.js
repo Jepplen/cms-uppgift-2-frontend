@@ -3,7 +3,7 @@ import { styled } from '@glitz/react';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import CookieService from "../services/CookieService";
-import DefaultProfilePicture from "../resources/profile_pictures/default.jpg";
+//import DefaultProfilePicture from "../resources/profile_pictures/default.jpg";
 import {updateToken} from "../services/store.js";
 
 export default function RegisterPage(props){
@@ -66,7 +66,6 @@ export default function RegisterPage(props){
         });
     }
 
-
     function updateUserData(data){
         const userData = {
             userId: data.author.id,
@@ -78,72 +77,6 @@ export default function RegisterPage(props){
         props.updateUserData(userData);
     }
 
-
-    //state.profile_picture ? state.profile_picture : DefaultProfilePicture
-
-    // function addProfilePicture(args) {
-    //     console.log(args);
-
-        
-    //     const data = new FormData();
-    //     data.append('files', DefaultProfilePicture);
-    //     data.append('refId', args.profileId);            
-    //     data.append('ref', 'profile');
-    //     data.append('source', 'users-permissions');
-    //     data.append('field', 'profile_picture');
-
-    //     axios.post('/upload', data)
-    //     .then((response) => {
-    //         console.log(response);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
-
-
-
-    //     // const config = {
-    //     //     headers: { Authorization: `Bearer ${args.token}` }
-    //     // };
-
-    //     // const upload_res = await axios({
-    //     //     method: "POST",
-    //     //     url: "/upload",
-    //     //     data: data
-    //     // });
-
-        
-    // }
-
-
-    // function piss(){
-    // const request = new XMLHttpRequest();
-
-    // const formData = new FormData();
-
-    // const formElements = formElement.elements;
-
-    // const data = {};
-
-    // for (let i = 0; i < formElements.length; i++) {
-    //   const currentElement = formElements[i];
-    
-    
-    //       const file = currentElement.files[0];
-    //       formData.append(`files.${currentElement.name}`, file, file.name);
-        
-      
-    // }
-
-    // formData.append('data', JSON.stringify(data));
-
-    // request.open('POST', `${HOST}/restaurants`);
-
-    // request.send(formData);
-    // }
-
-console.log(document.cookie);
-
     return(
         <ContentBox>
             <h1>Register Page</h1>
@@ -152,7 +85,7 @@ console.log(document.cookie);
                 :
                 <form onSubmit={onSubmit}> 
                     <FormBox>
-                        <label for={"username"}>Username</label>   
+                        <label htmlFor={"username"}>Username</label>   
                         <InputField 
                             id={"username"}                   
                             type="text"
@@ -160,7 +93,7 @@ console.log(document.cookie);
                             value={state.user}
                             onChange={onChange}
                         />
-                        <label for={"email"}>Email</label>    
+                        <label htmlFor={"email"}>Email</label>    
                         <InputField
                             id={"email"}
                             type="text"
@@ -168,7 +101,7 @@ console.log(document.cookie);
                             value={state.email}
                             onChange={onChange}
                         />
-                        <label for={"password"}>Password</label>    
+                        <label htmlFor={"password"}>Password</label>    
                         <InputField
                             id={"password"}
                             type="password"

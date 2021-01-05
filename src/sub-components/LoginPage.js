@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { styled } from '@glitz/react';
 import axios from "axios";
 import {Link} from "react-router-dom";
@@ -62,7 +62,7 @@ export default function LoginPage(props){
                 :
                 <form onSubmit={onSubmit}> 
                     <FormBox>
-                        <label for={"user"}>User name or email</label>   
+                        <label htmlFor={"user"}>User name or email</label>   
                         <InputField 
                             id={"user"}                   
                             type="text"
@@ -70,7 +70,7 @@ export default function LoginPage(props){
                             value={state.user}
                             onChange={onChange}
                         />
-                        <label for={"password"}>Password</label>    
+                        <label htmlFor={"password"}>Password</label>    
                         <InputField
                             id={"password"}
                             type="password"
