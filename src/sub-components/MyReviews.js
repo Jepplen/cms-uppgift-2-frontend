@@ -43,7 +43,7 @@ export default function MyReviews(props){
             {reviews.length < 1 ?
                 <p>You have not written any review yet. Start writing your first now <Link to={"/create-review"}>Create review</Link></p>
             :
-                reviews.map(review => <ReviewCard review={review} token={props.token} />)
+                reviews.map(review => <ReviewCard review={review} token={props.token} userData={props.userData} />)
             }
         </ContentBox>
     );

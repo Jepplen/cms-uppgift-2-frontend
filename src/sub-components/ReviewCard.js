@@ -5,8 +5,9 @@ import axios from "axios";
 import {Redirect} from "react-router-dom";
 
 export default function ReviewCard(props){
-    console.log(props.review);
+    console.log(props);
     const [content, setContent] = useState({
+        author: props.userData.username,
         gameName: props.review.game_name,
         gameId: props.review.game,
         reviewId: props.review.id,
@@ -29,14 +30,9 @@ export default function ReviewCard(props){
     },[]);
 
     function getBoxArt(){
-        console.log(props.review)
-
-        
-
         const config = {
             headers: { Authorization: `Bearer ${props.token}` }
         };
-
 
         axios.get(`/games/${props.review.game}`, config
         ).then(response => {
@@ -57,7 +53,10 @@ export default function ReviewCard(props){
     console.log(content);
 
     if (loadReview){
-        return <Redirect to="/review" />
+        return <Redirect to={{
+            pathname: "/review",
+            state: { content: content }
+          }} />
     }
 
     return(

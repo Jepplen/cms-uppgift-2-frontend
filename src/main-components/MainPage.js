@@ -135,7 +135,7 @@ export default function MainPage(props) {
                 <Route path="/register" render={() => (<RegisterPage isAuthed={isAuthed} updateUserData={updateUserData} token={token}/>)}/>
                 <Route path="/genre" render={() => (<Genre isAuthed={isAuthed} token={token}/>)}/>
                 <Route path="/create-review" render={() => (<CreateReviewPage isAuthed={isAuthed} userData={userData} token={token}/>)}/>
-                <Route path="/review" render={() => (<ReviewPage isAuthed={isAuthed} userData={userData} token={token}/>)}/>
+                <Route path="/review" render={(props) => (<ReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
             </Switch>
             </Content>
           </ContentBox>
