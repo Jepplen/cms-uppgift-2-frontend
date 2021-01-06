@@ -39,18 +39,31 @@ export default function MyReviews(props){
     
 
     return(
-        <ContentBox><h1>My Reviews</h1>
+        <Container>
+            <h1>My Reviews</h1>
+            <ContentBox>
             {reviews.length < 1 ?
                 <p>You have not written any review yet. Start writing your first now <Link to={"/create-review"}>Create review</Link></p>
             :
                 reviews.map(review => <ReviewCard review={review} token={props.token} userData={props.userData} />)
             }
         </ContentBox>
+        </Container> 
     );
 }
+const Container = styled.div({
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+});
 
 const ContentBox = styled.div({
-
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    //justifyContent: "flex-start"
 });
 
 {/* <Link to="create-review">

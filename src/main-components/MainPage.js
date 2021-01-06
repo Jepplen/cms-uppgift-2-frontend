@@ -11,6 +11,7 @@ import RegisterPage from "../sub-components/RegisterPage";
 import Genre from "../sub-components/Genre";
 import Footer from "./Footer";
 import CreateReviewPage from "../sub-components/CreateReviewPage";
+import EditReviewPage from "../sub-components/EditReviewPage";
 import ReviewPage from "../sub-components/ReviewPage";
 import CookieService from "../services/CookieService";
 import axios from "axios";
@@ -135,6 +136,7 @@ export default function MainPage(props) {
                 <Route path="/register" render={() => (<RegisterPage isAuthed={isAuthed} updateUserData={updateUserData} token={token}/>)}/>
                 <Route path="/genre" render={() => (<Genre isAuthed={isAuthed} token={token}/>)}/>
                 <Route path="/create-review" render={() => (<CreateReviewPage isAuthed={isAuthed} userData={userData} token={token}/>)}/>
+                <Route path="/edit-review" render={(props) => (<EditReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/review" render={(props) => (<ReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
             </Switch>
             </Content>

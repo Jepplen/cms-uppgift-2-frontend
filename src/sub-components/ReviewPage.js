@@ -1,83 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { styled } from '@glitz/react';
-import StarFullIcon from '@material-ui/icons/Star';
-import StarEmptyIcon from '@material-ui/icons/StarBorder';
 import axios from "axios";
+import {getStarRating, getFormatDate} from "../shared/utilities";
 //import { id } from "date-fns/locale";
 // import {Link} from "react-router-dom";
 
 export default function ReviewCard(props){
     const [content,] = useState(props.location.state.content);
     console.log(content)
-    // console.log(props.review);
-    // const [content, setContent] = useState({
-    //     gameName: props.review.game_name,
-    //     gameId: props.review.game,
-    //     reviewId: props.review.id,
-    //     profileId: props.review.profile,
-    //     rating: props.review.rating,
-    //     userId: props.review.author,
-    //     reviewContent: props.review.review_content,
-    //     reviewHeader: props.review.title,
-    //     publishDate: props.review.published_at,
-    //     lastUpdateDate: props.review.updated_at,
-    //     boxArtUrl: "",
-    //     genre: "",
-    //     gameDescription: "",
-    // });
-    // console.log(props.review);
-
-    // useEffect(() => {
-    //     getBoxArt();
-    // },[]);
-
-    // function getBoxArt(){
-    //     console.log(props.review)
-
-        
-
-    //     const config = {
-    //         headers: { Authorization: `Bearer ${props.token}` }
-    //     };
-
-
-    //     axios.get(`/games/${props.review.game}`, config
-    //     ).then(response => {
-    //         console.log("HERE 2")
-    //         console.log(response);
-    //         setContent({
-    //             ...content,
-    //             boxArtUrl: response.data.box_art.url,
-    //             genre: response.data.genre.genre_name,
-    //             gameDescription: response.data.description,
-    //         });
-    //         //setReviews(response.data.reviews);
-    //     }).catch(err => {
-    //         console.error(err);
-    //     });
-    // }
-
-    // console.log(content);
-
-    function starRating(){
-        let starArray = [];
-        for (let i = 0; i < content.rating; i++) {
-            starArray.push(<StarFullIcon />);
-        } 
-
-        if (content.rating < 5){
-            for (let i = 0; i < (5 - content.rating); i++) {
-                starArray.push(<StarEmptyIcon />)
-            }
-        }
-        return starArray;
-    }
-
-    function formatDate(){
-        let date = content.publishDate;
-        let index = date.indexOf("T");
-        return date.substring(0, index);
-    }
 
     return(
         <Container>
@@ -92,7 +22,7 @@ export default function ReviewCard(props){
                         Review by {content.author}
                     </Author>
                     <Date>
-                        Published {formatDate()}
+                        Published {getFormatDate(content.publishDate)}
                     </Date>                    
                 </DetailsContainer>
                 <ReviewContent>
@@ -101,7 +31,7 @@ export default function ReviewCard(props){
             </PrimaryContainer>
             <SecondaryContainer>
                 <RatingContainer>
-                    {starRating()}
+                    {getStarRating(content.rating)}
                 </RatingContainer>
                 <ImageContainer>
                     <GameName>

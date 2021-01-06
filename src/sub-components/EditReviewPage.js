@@ -6,17 +6,20 @@ import CookieService from "../services/CookieService";
 import DropDown from "../shared/DropDown";
 
 export default function EditReviewPage(props){
-    console.log(props.review);
+    const [content, setContent] = useState(props.location.state.content);
+    console.log(props);
     const [games, setGames] = useState([]);
     //const [game, setGame] = useState({});
     //const [dropDownValue, setDropDownValue] = useState("");
     const [state, setState] = useState({
-        name: "",
-        header: "",
-        content: "",
-        rating: "",
+        gameId: content.gameId,
+        name: content.gameName,
+        header: content.reviewHeader,
+        content: content.reviewContent,
+        rating: content.rating,
+        author: content.author,
+        boxArtUrl: content.boxArtUrl,
         game: "",
-        author: "Tjohej",
       });
 
     useEffect(() => {
@@ -54,7 +57,7 @@ export default function EditReviewPage(props){
             profile: JSON.stringify(props.userData.profileId),
         };
 
-        axios.post("/reviews", bodyParameters, config
+        axios.put(`/reviews/${content.reviewId}`, bodyParameters, config
         ).then((response) => {
             console.log(response);
         }).catch(error => {
@@ -77,18 +80,18 @@ export default function EditReviewPage(props){
 
     function handleDropDownValueChange(game){
         console.log(game);
-        setState({game: game});
+        setState({...state, game: game});
         
     }
 
     return(
         
         <ContentBox>
-            <h1>Create review</h1>
+            <h1>Edit review</h1>
             {props.isAuthed ? 
                 <InnerBox>
                     <ImageBox>
-                        {state.game ? <Img src={state.game.box_art.url}/> : null}
+                        {state.game ? <Img src={state.game.box_art.url}/> : <Img src={state.boxArtUrl}/>}
                     </ImageBox>                    
                     <FormBox onSubmit={handleSubmit}> 
                         <DropDown
@@ -96,6 +99,7 @@ export default function EditReviewPage(props){
                             category={"Game"}
                             data={games}
                             updateValue={handleDropDownValueChange}
+                            currentGame={content.gameId}
                         />
                         {/*<label for={"name"}>Name of game</label>   
                         <InputField 
@@ -129,7 +133,7 @@ export default function EditReviewPage(props){
                             value={state.content}
                             onChange={handleChange}
                         />
-                        <SubmitButton type="submit">Publish review</SubmitButton>
+                        <SubmitButton type="submit">Update review</SubmitButton>
                     </FormBox> 
                 </InnerBox>
             :

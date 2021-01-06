@@ -49,7 +49,7 @@ export default function LoginPage(props){
             email: data.user.email,
             profileId: data.user.profile.id,
             username: data.user.profile.profile_name,
-            description: data.user.profile.profile_description, 
+            description: data.user.profile.profile_description,
         };
         props.updateUserData(userData);
     }

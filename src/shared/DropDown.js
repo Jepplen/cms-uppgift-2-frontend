@@ -19,12 +19,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledOpenSelect(props) {
   const classes = useStyles();
-  const [game, setGame] = useState('');
+  const [game, setGame] = useState(props.currentGame ? props.currentGame : "");
   //const [title, setTitle] = useState('');
   const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
-    const gameId = e.target.value;
+    let gameId = e.target.value;
+    if (props.currentGame && !e.target.value){
+      gameId = props.currentGame;
+    }
+
+
+    //const gameId = e.target.value;
     setGame(gameId);
     let game = props.data.filter(item => item.id === gameId);
     props.updateValue(game[0]);
@@ -56,7 +62,7 @@ export default function ControlledOpenSelect(props) {
           required
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>{props.currentGame ? "Current game" : "None"}</em>
           </MenuItem>
           {props.data.map(content => {
               return(
