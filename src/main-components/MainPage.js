@@ -8,11 +8,12 @@ import Home from "../sub-components/Home";
 import MyReviews from "../sub-components/MyReviews";
 import LoginPage from "../sub-components/LoginPage";
 import RegisterPage from "../sub-components/RegisterPage";
-import Genre from "../sub-components/Genre";
+import GenrePage from "../sub-components/GenrePage";
 import Footer from "./Footer";
 import CreateReviewPage from "../sub-components/CreateReviewPage";
 import EditReviewPage from "../sub-components/EditReviewPage";
 import ReviewPage from "../sub-components/ReviewPage";
+import GamePage from "../sub-components/GamePage";
 import CookieService from "../services/CookieService";
 import axios from "axios";
 
@@ -134,9 +135,10 @@ export default function MainPage(props) {
                 <Route path="/my-reviews" render={() => (<MyReviews isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/login" render={() => (<LoginPage isAuthed={isAuthed} updateUserData={updateUserData} token={token}/>)}/>
                 <Route path="/register" render={() => (<RegisterPage isAuthed={isAuthed} updateUserData={updateUserData} token={token}/>)}/>
-                <Route path="/genre" render={() => (<Genre isAuthed={isAuthed} token={token}/>)}/>
+                <Route path="/genre" render={() => (<GenrePage isAuthed={isAuthed} token={token}/>)}/>
                 <Route path="/create-review" render={() => (<CreateReviewPage isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/edit-review" render={(props) => (<EditReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
+                <Route path="/game" render={(props) => (<GamePage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/review" render={(props) => (<ReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
             </Switch>
             </Content>

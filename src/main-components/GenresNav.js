@@ -1,14 +1,36 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import { styled } from '@glitz/react';
+import axios from "axios";
+import Accordion from "../shared/Accordion";
 
 export default function GenresNav(){
+    const [genres, setGenres] = useState([]);
+    const [state, setState] = useState({
+
+    });
+
+    useEffect(() => {
+        getGenres();
+    },[]);
+
+
+    function getGenres(){
+        axios.get("/genres"
+        ).then((response) => {
+            const sortedGenres = response.data.sort((a, b) => (a.genre_name > b.genre_name) - (a.genre_name < b.genre_name));
+            //const sortedGenres = response.data.sort((a, b) => a.genre_name < b.genre_name);
+            console.log(sortedGenres);
+            setGenres(sortedGenres);
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
+
     return(
         <GenresBox>
             <HeaderText>Genres</HeaderText>
-            <Link to="/genre">
-                <p>Adventure</p>
-            </Link>
+            <Accordion genres={genres} />
         </GenresBox>
     );
 }
