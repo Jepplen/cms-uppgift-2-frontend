@@ -56,11 +56,11 @@ export default function LoginPage(props){
 
     return(
         <ContentBox>
-            <h1>Login Page</h1>
+            <Login>Login</Login>
             {props.isAuthed ? 
                 <h3>You're logged in!</h3>
                 :
-                <form onSubmit={onSubmit}> 
+                <Form onSubmit={onSubmit}> 
                     <FormBox>
                         <label htmlFor={"user"}>User name or email</label>   
                         <InputField 
@@ -82,11 +82,20 @@ export default function LoginPage(props){
                         <LoginButton type="submit">Login</LoginButton>
                         <Link to="/register"><p>Don't have an account? Register</p></Link>
                     </FormBox>
-                </form>
+                </Form>
             }
         </ContentBox>
     );
 }
+
+const Login = styled.p({
+    fontSize: "25px",
+    margin: {
+        right: "20%",
+        top: "100px",
+    },
+});
+
 
 const ContentBox = styled.div({
     width: "100%",
@@ -104,6 +113,11 @@ const FormBox = styled.div({
     justifyContent: "center",
     alignItems: "flex-start",
     flexDirection: "column",
+
+        margin: {
+            right: "15%",
+        },
+
 });
 
 const LoginButton = styled.button({
@@ -113,3 +127,10 @@ const LoginButton = styled.button({
 const InputField = styled.input({
     alignSelf: "stretch",
 })
+
+const Form = styled.form({
+    margin: {
+        right: "20%",
+        top: "50px",
+    },
+});

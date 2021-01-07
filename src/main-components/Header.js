@@ -36,13 +36,13 @@ export default function Header(props){
             <NavReviews>
             {props.isAuthed ?
                 <Link to="my-reviews">
-                    <p>My Reviews</p>
+                    <Button>My reviews</Button>
                 </Link>
                 :
                 null
             }
                 <Link to="create-review">
-                    <p>Create review</p>
+                    <Button>Write a review</Button>
                 </Link>
             </NavReviews>
                 {props.isAuthed ? 
@@ -60,6 +60,29 @@ export default function Header(props){
     );
 }
 
+
+const Button = styled.button({
+    margin: {
+        top: "10px",
+    },
+    width: "120px",
+    height: "25px",
+    backgroundColor: "#9100ff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    outline: "none",
+    ':hover': {
+        backgroundColor: "#c981ff",
+    },
+    ':active': {
+        backgroundColor: "#450079",
+    },
+    margin: {
+        x: "10px",
+    },
+    cursor: "pointer",
+});
 
 
 const Content = styled.div({

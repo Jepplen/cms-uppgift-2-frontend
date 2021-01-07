@@ -79,11 +79,17 @@ export default function RegisterPage(props){
 
     return(
         <ContentBox>
-            <h1>Register Page</h1>
+            <Register>Register a new account</Register>
             {props.isAuthed ? 
-                <h3>Great! Now you can start writing reviews.</h3>
+                <Blank>
+                    <Text>Great! Now you can start writing reviews.</Text>
+                    <Link to={"/create-review"}
+                    >
+                        <Button>Write a review</Button>
+                    </Link>
+                </Blank>
                 :
-                <form onSubmit={onSubmit}> 
+                <Form onSubmit={onSubmit}> 
                     <FormBox>
                         <label htmlFor={"username"}>Username</label>   
                         <InputField 
@@ -120,11 +126,41 @@ export default function RegisterPage(props){
                         <LoginButton type="submit">Register</LoginButton>
                         <Link to="/login"><p>Already have an account? Login</p></Link>
                     </FormBox>
-                </form>
+                </Form>
             }
         </ContentBox>
     );
 }
+
+
+
+const Button = styled.button({
+    margin: {
+        top: "50px",
+    },
+    width: "150px",
+    height: "50px",
+    backgroundColor: "#9100ff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    outline: "none",
+    ':hover': {
+        backgroundColor: "#c981ff",
+    },
+    ':active': {
+        backgroundColor: "#450079",
+    },
+});
+
+const Register = styled.p({
+    fontSize: "25px",
+    margin: {
+        right: "20%",
+        top: "100px",
+    },
+});
+
 
 const ContentBox = styled.div({
     width: "100%",
@@ -151,3 +187,27 @@ const LoginButton = styled.button({
 const InputField = styled.input({
     alignSelf: "stretch",
 })
+
+const Form = styled.form({
+    margin: {
+        right: "20%",
+        top: "50px",
+    },
+});
+
+const Text = styled.p({
+
+});
+
+
+const Blank = styled.div({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: {
+        right: "20%",
+        top: "50px",
+    },
+});
+

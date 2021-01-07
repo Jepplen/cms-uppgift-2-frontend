@@ -6,16 +6,18 @@ import CookieService from "../services/CookieService";
 import DropDown from "../shared/DropDown";
 
 export default function CreateReviewPage(props){
+    console.log(props);
     const [games, setGames] = useState([]);
-    //const [game, setGame] = useState({});
+    const [content,] = useState(props.location.statet ? props.location.state.content : "");
     //const [dropDownValue, setDropDownValue] = useState("");
     const [state, setState] = useState({
-        name: "",
+        name: props.location.state ? props.location.state.content.title : "",
         header: "",
         content: "",
         rating: "",
-        game: "",
+        game: props.location.state ? props.location.state.content : "",
         author: "Tjohej",
+        owner: "",
       });
 
     useEffect(() => {
@@ -25,7 +27,30 @@ export default function CreateReviewPage(props){
     },[]);
 
     function handleChange (e) {
-        const value = e.target.value;
+        let value = e.target.value;
+
+        if(e.target.name === "rating"){
+            //let re = new RegExp('\\w+')
+            var reg = /^\d+$/;
+
+            
+
+            value = parseInt(value);
+
+            
+            if(!reg.test(value)){
+                value = "";
+                console.log("DSAD");
+            } else {
+                if (value > 5){
+                    value = 5;
+                }
+            }
+
+            
+     
+        }
+
         setState({
             ...state,
             [e.target.name]: value
@@ -49,6 +74,7 @@ export default function CreateReviewPage(props){
             rating: parseInt(state.rating),
             title: state.header,
             review_content: state.content,
+            owner: props.userData.username,
             game: JSON.stringify(state.game.id),
             profile: JSON.stringify(props.userData.profileId),
         };
@@ -83,11 +109,11 @@ export default function CreateReviewPage(props){
     return(
         
         <ContentBox>
-            <h1>Create review</h1>
+            <Header>Write a review</Header>
             {props.isAuthed ? 
                 <InnerBox>
                     <ImageBox>
-                        {state.game ? <Img src={state.game.box_art.url}/> : null}
+                        {state.game && <Img src={state.game.box_art.url}/>}
                     </ImageBox>                    
                     <FormBox onSubmit={handleSubmit}> 
                         <DropDown
@@ -95,6 +121,7 @@ export default function CreateReviewPage(props){
                             category={"Game"}
                             data={games}
                             updateValue={handleDropDownValueChange}
+                            currentGame={!!content.id && content.id}
                         />
                         {/*<label for={"name"}>Name of game</label>   
                         <InputField 
@@ -104,8 +131,14 @@ export default function CreateReviewPage(props){
                             value={state.name}
                             onChange={handleChange}
                         />*/}
-                        <label htmlFor={"rating"}>Rate the game</label>    
-                        <InputField
+                        <label htmlFor={"rating"}>Rate the game (0-5)</label>    
+                        <InputField 
+                            type={"number"}
+                            min={"0"}
+                            step={"1"}
+                            max={"5"}
+                            style={{width: "25px"}} 
+                            maxLength={1}
                             id={"rating"}
                             type="text"
                             name={"rating"}
@@ -132,13 +165,29 @@ export default function CreateReviewPage(props){
                     </FormBox> 
                 </InnerBox>
             :
-                <h3>
+                <AltText>
                     You need to <Link to="login">Login</Link> or <Link to="register">register</Link> an account before writing reviews.
-                </h3>
+                </AltText>
 }
         </ContentBox>
     );
 }
+
+
+const AltText = styled.p({
+    margin: {
+        top: "50px",
+        right: "20%",
+    },
+});
+
+const Header = styled.p({
+    fontSize: "25px",
+    margin: {
+        top: "20px",
+        right: "20%",
+    },
+});
 
 const Img = styled.img({
     width: "25vh",
@@ -168,6 +217,9 @@ const ImageBox = styled.div({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin:{
+        right: "30px",
+    }
     //flexDirection: "column",
 });
 

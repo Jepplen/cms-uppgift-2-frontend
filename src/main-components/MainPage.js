@@ -136,7 +136,7 @@ export default function MainPage(props) {
                 <Route path="/login" render={() => (<LoginPage isAuthed={isAuthed} updateUserData={updateUserData} token={token}/>)}/>
                 <Route path="/register" render={() => (<RegisterPage isAuthed={isAuthed} updateUserData={updateUserData} token={token}/>)}/>
                 <Route path="/genre" render={() => (<GenrePage isAuthed={isAuthed} token={token}/>)}/>
-                <Route path="/create-review" render={() => (<CreateReviewPage isAuthed={isAuthed} userData={userData} token={token}/>)}/>
+                <Route path="/create-review" render={(props) => (<CreateReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/edit-review" render={(props) => (<EditReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/game" render={(props) => (<GamePage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>
                 <Route path="/review" render={(props) => (<ReviewPage {...props} isAuthed={isAuthed} userData={userData} token={token}/>)}/>

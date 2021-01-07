@@ -65,7 +65,3 @@ const ContentBox = styled.div({
     flexWrap: "wrap",
     //justifyContent: "flex-start"
 });
-
-{/* <Link to="create-review">
-                    <p>Create review</p>
-            </Link> */}

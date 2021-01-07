@@ -9,7 +9,6 @@ export default function Content(props){
 
     return(
         <div>
-            <h1>Main Content</h1>
             {props.children}
         </div>
     );
