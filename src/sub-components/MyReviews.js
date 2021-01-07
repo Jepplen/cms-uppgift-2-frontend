@@ -40,17 +40,87 @@ export default function MyReviews(props){
 
     return(
         <Container>
-            <h1>My Reviews</h1>
-            <ContentBox>
-            {reviews.length < 1 ?
-                <p>You have not written any review yet. Start writing your first now <Link to={"/create-review"}>Create review</Link></p>
-            :
-                reviews.map(review => <ReviewCard review={review} token={props.token} userData={props.userData} />)
+            <PageTitleContainer>
+                <PageTitle>My Reviews</PageTitle>
+            </PageTitleContainer>
+            {reviews.length > 0 ?
+                <ContentBox>
+                    {reviews.map(review => <ReviewCard review={review} token={props.token} userData={props.userData} />)}
+                </ContentBox>
+                :
+                <ContentBoxEmpty>
+                    <Blank>
+                        <p>You have not written any reviews yet. Start writing your first review now.</p>
+                        <Link to={"/create-review"}
+                    >
+                            <Button>Write a review</Button>
+                        </Link>
+                    </Blank>
+                </ContentBoxEmpty>
             }
-        </ContentBox>
         </Container> 
     );
 }
+
+const PageTitleContainer = styled.div({
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+});
+
+const PageTitle = styled.p({
+    textAlign: "center",
+    width: "100px",
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+    animationName: {
+        from: {
+            transform: "translate(-100%, -60px)",
+
+        },
+        to: {
+            transform: "translate(-100%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "coral",
+    transform: "translateX(-100%)",
+});
+
+const Button = styled.button({
+    margin: {
+        top: "50px",
+    },
+    width: "150px",
+    height: "50px",
+    backgroundColor: "#9100ff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    outline: "none",
+    ':hover': {
+        backgroundColor: "#c981ff",
+    },
+    ':active': {
+        backgroundColor: "#450079",
+    },
+});
+
+
+const Blank = styled.div({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: {
+        right: "20%",
+        top: "150px",
+    },
+});
+
 const Container = styled.div({
     width: "100%",
     height: "100%",
@@ -64,4 +134,12 @@ const ContentBox = styled.div({
     flexDirection: "row",
     flexWrap: "wrap",
     //justifyContent: "flex-start"
+});
+
+const ContentBoxEmpty = styled.div({
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
 });

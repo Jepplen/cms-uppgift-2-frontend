@@ -30,14 +30,9 @@ export default function CreateReviewPage(props){
         let value = e.target.value;
 
         if(e.target.name === "rating"){
-            //let re = new RegExp('\\w+')
-            var reg = /^\d+$/;
-
-            
-
+            const reg = /^\d+$/;
             value = parseInt(value);
 
-            
             if(!reg.test(value)){
                 value = "";
                 console.log("DSAD");
@@ -46,9 +41,6 @@ export default function CreateReviewPage(props){
                     value = 5;
                 }
             }
-
-            
-     
         }
 
         setState({
@@ -109,7 +101,7 @@ export default function CreateReviewPage(props){
     return(
         
         <ContentBox>
-            <Header>Write a review</Header>
+            <PageTitle>Write a review</PageTitle>
             {props.isAuthed ? 
                 <InnerBox>
                     <ImageBox>
@@ -123,21 +115,9 @@ export default function CreateReviewPage(props){
                             updateValue={handleDropDownValueChange}
                             currentGame={!!content.id && content.id}
                         />
-                        {/*<label for={"name"}>Name of game</label>   
-                        <InputField 
-                            id={"name"}                   
-                            type="text"
-                            name={"name"}
-                            value={state.name}
-                            onChange={handleChange}
-                        />*/}
                         <label htmlFor={"rating"}>Rate the game (0-5)</label>    
-                        <InputField 
-                            type={"number"}
-                            min={"0"}
-                            step={"1"}
-                            max={"5"}
-                            style={{width: "25px"}} 
+                        <InputField                         
+                            style={{width: "20px"}} 
                             maxLength={1}
                             id={"rating"}
                             type="text"
@@ -145,7 +125,7 @@ export default function CreateReviewPage(props){
                             value={state.rating}
                             onChange={handleChange}
                         />
-                        <label htmlFor={"header"}>Header of review</label>    
+                        <label htmlFor={"header"}>Header</label>    
                         <InputField
                             id={"header"}
                             type="text"
@@ -153,7 +133,7 @@ export default function CreateReviewPage(props){
                             value={state.header}
                             onChange={handleChange}
                         />
-                        <label htmlFor={"content"}>Content of review</label>    
+                        <label htmlFor={"content"}>Content</label>    
                         <InputTextArea
                             id={"content"}
                             type="textarea"
@@ -173,10 +153,29 @@ export default function CreateReviewPage(props){
     );
 }
 
+const PageTitle = styled.p({
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+
+    animationName: {
+        from: {
+            transform: "translate(-100%, -60px)",
+
+        },
+        to: {
+            transform: "translate(-100%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "coral",
+    transform: "translateX(-100%)",
+});
 
 const AltText = styled.p({
     margin: {
-        top: "50px",
+        top: "150px",
         right: "20%",
     },
 });
@@ -237,6 +236,7 @@ const FormBox = styled.form({
 
 const SubmitButton = styled.button({
     alignSelf: "stretch",
+    height: "30px",
 });
 
 const InputField = styled.input({

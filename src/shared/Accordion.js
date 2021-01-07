@@ -56,16 +56,18 @@ const GameButton = styled.button({
     },
     width: "100%",
     height: "25px",
-    backgroundColor: "#9100ff",
-    color: "white",
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    color: "black",
     border: "none",
     borderRadius: "5px",
     outline: "none",
     ':hover': {
         backgroundColor: "#c981ff",
+        color: "white",
     },
     ':active': {
         backgroundColor: "#450079",
+        color: "white",
     },
 });
 

@@ -79,7 +79,7 @@ export default function RegisterPage(props){
 
     return(
         <ContentBox>
-            <Register>Register a new account</Register>
+            {!props.isAuthed ? <Register>Register a new account</Register> : null}
             {props.isAuthed ? 
                 <Blank>
                     <Text>Great! Now you can start writing reviews.</Text>
@@ -207,7 +207,7 @@ const Blank = styled.div({
     alignItems: "center",
     margin: {
         right: "20%",
-        top: "50px",
+        top: "150px",
     },
 });
 

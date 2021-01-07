@@ -86,6 +86,7 @@ const Button = styled.button({
 
 
 const Content = styled.div({
+    position: "relative",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -95,6 +96,7 @@ const Content = styled.div({
     backgroundColor: "#EFA292",
     fontSize: '18px',
     color: "white",
+    zIndex: "2",
 });
 
 const HomeBox = styled.div({

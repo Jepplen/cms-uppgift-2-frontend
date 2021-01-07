@@ -29,8 +29,6 @@ export default function MainPage(props) {
     profileId: "",
   });
 
-
-  
   useEffect(() => {
     let current_cookie = document.cookie;
     setInterval(() => {
@@ -46,8 +44,6 @@ export default function MainPage(props) {
       getUserData();
     }
   },[]);
-
-  
 
   const changedCookie = () => {
     console.log("COOKIE HAS CHANGED");
@@ -86,8 +82,6 @@ export default function MainPage(props) {
       headers: { Authorization: `Bearer ${token}` }
     };
 
-    
-
     axios.get(`/profiles/${profileId}`, config
     ).then((response) => {
         console.log(response);
@@ -105,21 +99,6 @@ export default function MainPage(props) {
         console.log(error);
     });
   }
-
-
-  
-
-//   function updateUserDataInMainPage(data){
-//     const userData = {
-//         userId: data.user.id,
-//         email: data.user.email,
-//         profileId: data.user.profile.id,
-//         username: data.user.profile.profile_name,
-//         description: data.user.profile.profile_description, 
-//     };
-//     updateUserData(userData);
-// }
-
   
   return (
     
@@ -128,7 +107,6 @@ export default function MainPage(props) {
         <PrimaryContent>
           <GenresNav />
           <ContentBox>
-            {isAuthed ? <p>Logged in</p> : <p>Logged out</p>}
             <Content>
               <Switch>            
                 <Route path="/" exact render={() => (<Home isAuthed={isAuthed} token={token} />)}/>
@@ -154,13 +132,11 @@ const PrimaryContent = styled.div({
   display: "flex",
   flexDirection: "row",
   width: "100vw",
-  //height: "80vh",
 });
 
 const ContentBox = styled.div({
   display: "flex",
   flexDirection: "column",
   width: "85vw",
-  //height: "80vh",
   backgroundColor: "blanchedalmond"
 });

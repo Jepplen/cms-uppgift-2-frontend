@@ -98,6 +98,9 @@ const NewReviewButton = styled.button({
 const Container = styled.div({
     display: "flex",
     justifyContent: "space-between",
+    padding: {
+        top: "50px"
+    }
 });
 
 const GameContainer = styled.div({

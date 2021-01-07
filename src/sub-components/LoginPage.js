@@ -56,9 +56,10 @@ export default function LoginPage(props){
 
     return(
         <ContentBox>
-            <Login>Login</Login>
+            {!props.isAuthed ? <Login>Login</Login> : null}
+            
             {props.isAuthed ? 
-                <h3>You're logged in!</h3>
+                <LoginText>You're logged in!</LoginText>
                 :
                 <Form onSubmit={onSubmit}> 
                     <FormBox>
@@ -87,6 +88,14 @@ export default function LoginPage(props){
         </ContentBox>
     );
 }
+
+const LoginText = styled.p({
+    fontSize: "20px",
+    margin: {
+        right: "20%",
+        top: "150px",
+    },
+});
 
 const Login = styled.p({
     fontSize: "25px",

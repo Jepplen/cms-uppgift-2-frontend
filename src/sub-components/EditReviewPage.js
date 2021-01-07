@@ -29,7 +29,21 @@ export default function EditReviewPage(props){
     },[]);
 
     function handleChange (e) {
-        const value = e.target.value;
+        let value = e.target.value;
+
+        if(e.target.name === "rating"){
+            const reg = /^\d+$/;
+            value = parseInt(value);
+
+            if(!reg.test(value)){
+                value = "";
+                console.log("DSAD");
+            } else {
+                if (value > 5){
+                    value = 5;
+                }
+            }
+        }
         setState({
             ...state,
             [e.target.name]: value
@@ -87,7 +101,7 @@ export default function EditReviewPage(props){
     return(
         
         <ContentBox>
-            <h1>Edit review</h1>
+            <PageTitle>Edit review</PageTitle>
             {props.isAuthed ? 
                 <InnerBox>
                     <ImageBox>
@@ -101,23 +115,17 @@ export default function EditReviewPage(props){
                             updateValue={handleDropDownValueChange}
                             currentGame={content.gameId}
                         />
-                        {/*<label for={"name"}>Name of game</label>   
-                        <InputField 
-                            id={"name"}                   
-                            type="text"
-                            name={"name"}
-                            value={state.name}
-                            onChange={handleChange}
-                        />*/}
                         <label htmlFor={"rating"}>Rate the game</label>    
                         <InputField
+                            style={{width: "22px"}} 
+                            maxLength={1}
                             id={"rating"}
                             type="text"
                             name={"rating"}
                             value={state.rating}
                             onChange={handleChange}
                         />
-                        <label htmlFor={"header"}>Header of review</label>    
+                        <label htmlFor={"header"}>Header</label>    
                         <InputField
                             id={"header"}
                             type="text"
@@ -125,7 +133,7 @@ export default function EditReviewPage(props){
                             value={state.header}
                             onChange={handleChange}
                         />
-                        <label htmlFor={"content"}>Content of review</label>    
+                        <label htmlFor={"content"}>Content</label>    
                         <InputTextArea
                             id={"content"}
                             type="textarea"
@@ -144,6 +152,25 @@ export default function EditReviewPage(props){
         </ContentBox>
     );
 }
+
+const PageTitle = styled.p({
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+    animationName: {
+        from: {
+            transform: "translate(-100%, -60px)",
+
+        },
+        to: {
+            transform: "translate(-100%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "coral",
+    transform: "translateX(-100%)",
+});
 
 const Img = styled.img({
     width: "25vh",
@@ -173,7 +200,9 @@ const ImageBox = styled.div({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    //flexDirection: "column",
+    margin:{
+        right: "30px",
+    }
 });
 
 const FormBox = styled.form({
@@ -190,6 +219,7 @@ const FormBox = styled.form({
 
 const SubmitButton = styled.button({
     alignSelf: "stretch",
+    height: "30px",
 });
 
 const InputField = styled.input({

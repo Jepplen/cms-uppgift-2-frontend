@@ -48,8 +48,8 @@ const GenresBox = styled.div({
     backgroundColor: "lightgrey",
 });
 
-const HeaderText = styled.h3({
+const HeaderText = styled.p({
     padding: {y: "20px"},
     boxSizing: "border-box",
-    fontSize: "26px",
+    fontSize: "20px",
 });
