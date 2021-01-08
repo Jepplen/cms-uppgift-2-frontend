@@ -23,7 +23,6 @@ export default function ReviewCard(props){
         genre: "",
         gameDescription: "",
     });
-    
 
     useEffect(() => {
         getBoxArt();
@@ -38,6 +37,9 @@ export default function ReviewCard(props){
         ).then(response => {
             console.log("HERE 2")
             console.log(response);
+
+
+
             setContent({
                 ...content,
                 boxArtUrl: response.data.box_art.url,

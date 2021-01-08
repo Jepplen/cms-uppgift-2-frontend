@@ -86,7 +86,8 @@ export default function CreateReviewPage(props){
         
         axios.get("/games", config
         ).then((response) => {
-            setGames(response.data);
+            let sortedGames = response.data.sort((a, b) => (a.title > b.title) - (a.title < b.title));
+            setGames(sortedGames);
         }).catch(error => {
             console.log(error);
         });
