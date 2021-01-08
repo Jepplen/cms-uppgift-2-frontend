@@ -26,7 +26,7 @@ export default function Header(props){
         <Content>
             <HomeBox>
                 <Link to="/">
-                    <p>Home</p>
+                    <Button>Home</Button>
                 </Link>
             </HomeBox>
             <LogoBox>
@@ -34,6 +34,9 @@ export default function Header(props){
             </LogoBox>
             <NavBox>                   
             <NavReviews>
+            <Link to="create-review">
+                    <Button>Write a review</Button>
+                </Link>
             {props.isAuthed ?
                 <Link to="my-reviews">
                     <Button>My reviews</Button>
@@ -41,20 +44,20 @@ export default function Header(props){
                 :
                 null
             }
-                <Link to="create-review">
-                    <Button>Write a review</Button>
-                </Link>
+                
             </NavReviews>
                 {props.isAuthed ? 
-                    <button onClick={handleLogout}>
+                <Link>
+                    <LogButton onClick={handleLogout}>
                         Logout
-                    </button>
+                    </LogButton>
+                    </Link>
                 : 
                     <Link to="login">
-                        <LoginButton>Login</LoginButton>
+                        <LogButton>Login</LogButton>
                     </Link>
                 }
-                
+            
             </NavBox>
         </Content>
     );
@@ -62,6 +65,29 @@ export default function Header(props){
 
 
 const Button = styled.button({
+    margin: {
+        top: "10px",
+    },
+    width: "120px",
+    height: "25px",
+    backgroundColor: "#9100ff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    outline: "none",
+    ':hover': {
+        backgroundColor: "#c981ff",
+    },
+    ':active': {
+        backgroundColor: "#450079",
+    },
+    margin: {
+        x: "10px",
+    },
+    cursor: "pointer",
+});
+
+const LogButton = styled.button({
     margin: {
         top: "10px",
     },
@@ -116,7 +142,7 @@ const LogoBox = styled.div({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: "55vw",
+    width: "45vw",
     height: "20vh",
     backgroundColor: "lightgreen",
     fontSize: '18px',
@@ -128,7 +154,7 @@ const NavBox = styled.div({
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "row",
-    width: "25vw",
+    width: "35vw",
     height: "20vh",
     backgroundColor: "dodgerblue",
     fontSize: '18px',
@@ -136,7 +162,10 @@ const NavBox = styled.div({
 });
 
 const LoginButton = styled.button({
-   
+   width: "100px",
+   margin: {
+       right: "50px",
+   },
 });
 
 
@@ -144,7 +173,7 @@ const NavReviews = styled.div({
     width: "15vw",
     height: "100%",
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     //flexDirection: "row",
 

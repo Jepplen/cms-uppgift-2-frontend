@@ -18,8 +18,11 @@ export default function GenresNav(){
     function getGenres(){
         axios.get("/genres"
         ).then((response) => {
-            const sortedGenres = response.data.sort((a, b) => (a.genre_name > b.genre_name) - (a.genre_name < b.genre_name));
-            //const sortedGenres = response.data.sort((a, b) => a.genre_name < b.genre_name);
+            let sortedGenres = response.data.sort((a, b) => (a.genre_name > b.genre_name) - (a.genre_name < b.genre_name));
+            for (let genre of sortedGenres){
+                genre.games.sort((a, b) => (a.title > b.title) - (a.title < b.title));
+            }
+
             console.log(sortedGenres);
             setGenres(sortedGenres);
         }).catch((err) => {

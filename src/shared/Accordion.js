@@ -38,7 +38,7 @@ export default function CustomizedAccordions(props) {
                             state: { game: game }
                         }}                    
                     >
-                        <GameButton>{game.title}</GameButton>
+                        <GameButton><span style={{paddingLeft: "30px"}}>{game.title}</span></GameButton>
                     </Link>
                 )}
               </Typography>
@@ -51,24 +51,28 @@ export default function CustomizedAccordions(props) {
 
 
 const GameButton = styled.button({
+
+  textAlign: "left",
+
     margin: {
-        top: "10px",
+        top: "0px",
     },
     width: "100%",
     height: "25px",
     backgroundColor: "rgba(0, 0, 0, 0)",
     color: "black",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "2px",
     outline: "none",
     ':hover': {
-        backgroundColor: "#c981ff",
+        backgroundColor: "#9100ff",
         color: "white",
     },
     ':active': {
-        backgroundColor: "#450079",
+        backgroundColor: "#550095",
         color: "white",
     },
+
 });
 
 
@@ -94,10 +98,11 @@ const Accordion = withStyles({
       backgroundColor: 'rgba(0, 0, 0, .03)',
       borderBottom: '1px solid rgba(0, 0, 0, .125)',
       marginBottom: -1,
-      minHeight: 56,
+      minHeight: 45,
       '&$expanded': {
-        minHeight: 56,
+        minHeight: 45,
       },
+     
     },
     content: {
       '&$expanded': {
@@ -109,6 +114,10 @@ const Accordion = withStyles({
   
   const AccordionDetails = withStyles((theme) => ({
     root: {
-      padding: theme.spacing(2),
+      display: "flex",
+      alignItems: "flex-start",
+      padding: "0",
+      width: "100%",
+      boxSizing: "border-box",
     },
   }))(MuiAccordionDetails);

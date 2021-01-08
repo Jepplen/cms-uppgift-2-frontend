@@ -101,6 +101,7 @@ const Container = styled.div({
     padding: {
         top: "50px"
     }
+    
 });
 
 const GameContainer = styled.div({
@@ -108,7 +109,7 @@ const GameContainer = styled.div({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    border: "1px solid black",
+    //border: "1px solid black",
     boxSizing:"border-box",
     padding: {
         x: "10px",
@@ -166,7 +167,11 @@ const ReviewCard = styled.div({
         bottom: "10px",
     },
     boxSizing: "border-box",
-    border: "1px solid black",
+    //border: "1px solid black",
+    backgroundColor: "#e8aa61",
+    //filter: "brightness(85%)",
+    border: "1px solid white",
+    borderRadius: "10px",
 });
 
 const ReviewTitle = styled.p({
