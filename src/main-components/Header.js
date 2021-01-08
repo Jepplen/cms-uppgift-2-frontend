@@ -2,6 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import { styled } from '@glitz/react';
 import CookieService from "../services/CookieService";
+import IconLogo from "../resources/icon_logo.png";
+import BobOmb from "../resources/bob-omb.png";
+import Logo from "../resources/logo.png";
 //let cookie = browser.cookies.onChanged.addListener(CookieService.get("access_token"));
 
 export default function Header(props){
@@ -26,11 +29,11 @@ export default function Header(props){
         <Content>
             <HomeBox>
                 <Link to="/">
-                    <Button>Home</Button>
+                    <ButtonLogo><IconLogoImg src={BobOmb}/></ButtonLogo>
                 </Link>
             </HomeBox>
             <LogoBox>
-                <h1>Logo</h1>
+                <LogoImg src={Logo}/>
             </LogoBox>
             <NavBox>                   
             <NavReviews>
@@ -63,6 +66,35 @@ export default function Header(props){
     );
 }
 
+const LogoImg = styled.img({
+    height: "90px"
+});
+
+const IconLogoImg = styled.img({
+    width: "75px"
+});
+
+const ButtonLogo = styled.button({
+    margin: {
+        top: "10px",
+    },
+    
+    backgroundColor: "#9100ff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    outline: "none",
+    ':active': {
+        backgroundColor: "#450079",
+    },
+    margin: {
+        x: "10px",
+    },
+    padding: {
+        xy: "10px",
+    },
+    cursor: "pointer",
+});
 
 const Button = styled.button({
     margin: {
@@ -132,7 +164,7 @@ const HomeBox = styled.div({
     flexDirection: "row",
     width: "20vw",
     height: "20vh",
-    backgroundColor: "lightred",
+    backgroundColor: "#2a2a2a",
     fontSize: '18px',
     color: "white",
 });
@@ -144,7 +176,7 @@ const LogoBox = styled.div({
     flexDirection: "row",
     width: "45vw",
     height: "20vh",
-    backgroundColor: "lightgreen",
+    backgroundColor: "#2a2a2a",
     fontSize: '18px',
     color: "black",
 });
@@ -156,7 +188,7 @@ const NavBox = styled.div({
     flexDirection: "row",
     width: "35vw",
     height: "20vh",
-    backgroundColor: "dodgerblue",
+    backgroundColor: "#2a2a2a",
     fontSize: '18px',
     color: "white",
 });
