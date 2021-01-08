@@ -23,7 +23,7 @@ export default function Header(props){
     // if (!loggedIn){
     //     return <Redirect to="/" />
     // }
-
+    console.log(props)
 
     return(
         <Content>
@@ -62,12 +62,23 @@ export default function Header(props){
                 }
             
             </NavBox>
+            {props.isAuthed ? <LoggedInUser>Hello {props.userData}</LoggedInUser> : null}
         </Content>
     );
 }
 
+const LoggedInUser = styled.p({
+    position: "absolute",
+   // zIndex: "3",
+    top: "20px",
+    right: "54px",
+    color: "white",
+
+});
+
 const LogoImg = styled.img({
-    height: "90px"
+    height: "90px",
+    transform: "translateX(30%)",
 });
 
 const IconLogoImg = styled.img({

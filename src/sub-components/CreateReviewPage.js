@@ -8,7 +8,8 @@ import DropDown from "../shared/DropDown";
 export default function CreateReviewPage(props){
     console.log(props);
     const [games, setGames] = useState([]);
-    const [content,] = useState(props.location.statet ? props.location.state.content : "");
+    const [content,] = useState(props.location.state ? props.location.state.content : "");
+    const [success, setSuccess] = useState(false);
     //const [dropDownValue, setDropDownValue] = useState("");
     const [state, setState] = useState({
         name: props.location.state ? props.location.state.content.title : "",
@@ -35,7 +36,6 @@ export default function CreateReviewPage(props){
 
             if(!reg.test(value)){
                 value = "";
-                console.log("DSAD");
             } else {
                 if (value > 5){
                     value = 5;
@@ -52,7 +52,6 @@ export default function CreateReviewPage(props){
     function handleSubmit(e){
         e.preventDefault();
         createReview();
-        setState({username: "", email: "", password: ""});
     }
 
 
@@ -73,7 +72,9 @@ export default function CreateReviewPage(props){
 
         axios.post("/reviews", bodyParameters, config
         ).then((response) => {
-            console.log(response);
+            //console.log(response);
+            setSuccess(true);
+            //setState({username: "", email: "", password: ""});
         }).catch(error => {
             console.log(error);
         });
@@ -95,14 +96,23 @@ export default function CreateReviewPage(props){
 
     function handleDropDownValueChange(game){
         console.log(game);
-        setState({game: game});
+        setState({...state, game: game});
         
+    }
+
+    if (success){
+        return(
+            <ContentBox>
+                <AltText>Success! You review is now published for the world to see and read.</AltText>
+            </ContentBox>
+        );
     }
 
     return(
         
         <ContentBox>
             <PageTitle>Write a review</PageTitle>
+            
             {props.isAuthed ? 
                 <InnerBox>
                     <ImageBox>
@@ -155,11 +165,12 @@ export default function CreateReviewPage(props){
 }
 
 const PageTitle = styled.p({
+    textAlign: "center",
+    //width: "200px",
     padding: {
         x: "15px",
         y: "15px",
     },
-
     animationName: {
         from: {
             transform: "translate(-100%, -60px)",
@@ -170,8 +181,12 @@ const PageTitle = styled.p({
         },
     },
     animationDuration: "1s",
-    backgroundColor: "coral",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
     transform: "translateX(-100%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
 });
 
 const AltText = styled.p({

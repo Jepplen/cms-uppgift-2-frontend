@@ -103,7 +103,7 @@ export default function MainPage(props) {
   return (
     
       <Router>
-        <Header isAuthed={isAuthed} token={token}/>
+        <Header isAuthed={isAuthed} token={token} userData={userData.username}/>
         <PrimaryContent>
           <GenresNav />
           <ContentBox>

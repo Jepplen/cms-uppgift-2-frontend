@@ -155,6 +155,8 @@ export default function EditReviewPage(props){
 }
 
 const PageTitle = styled.p({
+    textAlign: "center",
+    //width: "200px",
     padding: {
         x: "15px",
         y: "15px",
@@ -169,8 +171,12 @@ const PageTitle = styled.p({
         },
     },
     animationDuration: "1s",
-    backgroundColor: "coral",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
     transform: "translateX(-100%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
 });
 
 const Img = styled.img({

@@ -8,6 +8,7 @@ export default function GamePage(props){
     const [rating, setRating] = useState(null);
     console.log(props);
     const [game, setGame] = useState(null);
+    const [genre,] = useState(props.location.state.genre);
 
     useEffect(() => {
         getGame();
@@ -16,7 +17,6 @@ export default function GamePage(props){
     function getGame(){
         axios.get(`/games/${props.location.state.game.id}`
         ).then((response) => {
-            console.log(response.data);
             setGame(response.data);
             setRating(getAverageStarRating(response.data.reviews));
         }).catch((err) => {
@@ -28,9 +28,12 @@ export default function GamePage(props){
         return <div />;
     }
 
-
+    console.log(props)
     return(
-        <Container>
+        <SuperContainer>
+            <PageTitle>{game.title}</PageTitle>
+            <Container>
+            
             <GameContainer>
                 <GameTitle>{game.title}</GameTitle>
                 {!!game.reviews.length && 
@@ -71,10 +74,40 @@ export default function GamePage(props){
                    
             </ReviewContainer>
         </Container>
+        </SuperContainer> 
     );
 }
 
+const SuperContainer = styled.div({
+    display: "flex",
+    flexDirection: "column",
+});
 
+const PageTitle = styled.p({
+    textAlign: "center",
+    width: "20%",
+    //width: "200px",
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+    animationName: {
+        from: {
+            transform: "translate(126%, -60px)",
+
+        },
+        to: {
+            transform: "translate(126%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
+    transform: "translateX(126%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
+});
 
 const NewReviewButton = styled.button({
     margin: {
@@ -188,7 +221,7 @@ const ReviewAuthorDate = styled.div({
     borderBottom: "1px solid grey",
 });
 const ReviewAuthor = styled.p({
-    width: "30%",
+    width: "70%",
 });
 
 const ReviewDate = styled.p({

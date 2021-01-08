@@ -35,7 +35,7 @@ export default function CustomizedAccordions(props) {
                         key={game.title + game.id}
                         to={{            
                             pathname: "/game",
-                            state: { game: game }
+                            state: { game: game, genre: genre.genre_name }
                         }}                    
                     >
                         <GameButton><span style={{paddingLeft: "30px"}}>{game.title}</span></GameButton>

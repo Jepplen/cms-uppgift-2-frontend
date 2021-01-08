@@ -51,8 +51,8 @@ export default function Home(props){
 
 const ReviewContent = styled.p({
     padding: {
-        xy: "10px",
-    }
+        xy: "15px",
+    },
 });
 
 const ReviewRating = styled.div({
@@ -62,19 +62,22 @@ const ReviewRating = styled.div({
 
 const ReviewTitle = styled.p({
     fontSize: "20px",
+    margin: {
+        bottom: "10px",
+    },
 });
 
 const ReviewAuthorDate = styled.div({
     display: "flex",
     justifyContent: "space-between",
-    with: "100%",
+    width: "98%",
     padding: {
         bottom: "10px",
     },
     borderBottom: "1px solid grey",
 });
 const ReviewAuthor = styled.p({
-    width: "30%",
+    width: "70%",
 });
 
 const ReviewDate = styled.p({
@@ -100,8 +103,12 @@ const PageTitle = styled.p({
         },
     },
     animationDuration: "1s",
-    backgroundColor: "coral",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
     transform: "translateX(175%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
 });
 
 
@@ -139,7 +146,6 @@ const ReviewColumn = styled.div({
 
 const ReviewCard = styled.div({
     width: "80%",
-    height: "150px",
     display: "flex",
     backgroundColor: "white",
     margin: {
