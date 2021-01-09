@@ -56,8 +56,7 @@ export default function LoginPage(props){
 
     return(
         <ContentBox>
-            {!props.isAuthed ? <Login>Login</Login> : null}
-            
+            <PageTitle>Login</PageTitle>
             {props.isAuthed ? 
                 <LoginText>You're logged in!</LoginText>
                 :
@@ -81,13 +80,48 @@ export default function LoginPage(props){
                         />
                         
                         <LoginButton type="submit">Login</LoginButton>
-                        <Link to="/register"><p>Don't have an account? Register</p></Link>
+                        <Link to="/register"><LinkText>Don't have an account?</LinkText></Link>
                     </FormBox>
                 </Form>
             }
         </ContentBox>
     );
 }
+
+const LinkText = styled.p({
+    width: "100%",
+    padding: {
+        top: "10px",
+        left: "20%",
+    },
+    fontSize: "14px",
+});
+
+const PageTitle = styled.p({
+    textAlign: "center",
+    width: "20%",
+    //width: "200px",
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+    animationName: {
+        from: {
+            transform: "translate(-49%, -60px)",
+
+        },
+        to: {
+            transform: "translate(-49%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
+    transform: "translateX(-49%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
+});
 
 const LoginText = styled.p({
     fontSize: "20px",
@@ -140,6 +174,6 @@ const InputField = styled.input({
 const Form = styled.form({
     margin: {
         right: "20%",
-        top: "50px",
+        top: "125px",
     },
 });

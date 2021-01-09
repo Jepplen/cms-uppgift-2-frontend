@@ -71,10 +71,8 @@ export default function CreateReviewPage(props){
         };
 
         axios.post("/reviews", bodyParameters, config
-        ).then((response) => {
-            //console.log(response);
+        ).then(() => {
             setSuccess(true);
-            //setState({username: "", email: "", password: ""});
         }).catch(error => {
             console.log(error);
         });
@@ -103,7 +101,8 @@ export default function CreateReviewPage(props){
     if (success){
         return(
             <ContentBox>
-                <AltText>Success! You review is now published for the world to see and read.</AltText>
+                <PageTitle>Write a review</PageTitle>
+                <AltText>Success! Your review is now published for the world to read.</AltText>
             </ContentBox>
         );
     }
@@ -191,7 +190,7 @@ const PageTitle = styled.p({
 
 const AltText = styled.p({
     margin: {
-        top: "150px",
+        top: "175px",
         right: "20%",
     },
 });

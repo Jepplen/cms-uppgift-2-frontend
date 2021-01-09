@@ -6,11 +6,10 @@ import CookieService from "../services/CookieService";
 import DropDown from "../shared/DropDown";
 
 export default function EditReviewPage(props){
-    const [content, setContent] = useState(props.location.state.content);
+    const [content,] = useState(props.location.state.content);
     console.log(props);
     const [games, setGames] = useState([]);
-    //const [game, setGame] = useState({});
-    //const [dropDownValue, setDropDownValue] = useState("");
+    const [success, setSuccess] = useState(false);
     const [state, setState] = useState({
         gameId: content.gameId,
         name: content.gameName,
@@ -53,7 +52,6 @@ export default function EditReviewPage(props){
     function handleSubmit(e){
         e.preventDefault();
         createReview();
-        setState({username: "", email: "", password: ""});
     }
 
 
@@ -72,8 +70,8 @@ export default function EditReviewPage(props){
         };
 
         axios.put(`/reviews/${content.reviewId}`, bodyParameters, config
-        ).then((response) => {
-            console.log(response);
+        ).then(() => {
+            setSuccess(true);
         }).catch(error => {
             console.log(error);
         });
@@ -94,13 +92,19 @@ export default function EditReviewPage(props){
     }
 
     function handleDropDownValueChange(game){
-        console.log(game);
-        setState({...state, game: game});
-        
+        setState({...state, game: game});  
+    }
+
+    if (success){
+        return(
+            <ContentBox>
+                <PageTitle>Edit review</PageTitle>
+                <AltText>Success! Your review has been updated.</AltText>
+            </ContentBox>
+        );
     }
 
     return(
-        
         <ContentBox>
             <PageTitle>Edit review</PageTitle>
             {props.isAuthed ? 
@@ -153,6 +157,13 @@ export default function EditReviewPage(props){
         </ContentBox>
     );
 }
+
+const AltText = styled.p({
+    margin: {
+        top: "225px",
+        right: "20%",
+    },
+});
 
 const PageTitle = styled.p({
     textAlign: "center",

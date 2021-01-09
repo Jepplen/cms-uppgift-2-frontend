@@ -35,18 +35,12 @@ export default function ReviewCard(props){
 
         axios.get(`/games/${props.review.game}`, config
         ).then(response => {
-            console.log("HERE 2")
-            console.log(response);
-
-
-
             setContent({
                 ...content,
                 boxArtUrl: response.data.box_art.url,
                 genre: response.data.genre.genre_name,
                 gameDescription: response.data.description,
             });
-            //setReviews(response.data.reviews);
         }).catch(err => {
             console.error(err);
         });
@@ -58,8 +52,8 @@ export default function ReviewCard(props){
         };
 
         axios.delete(`/reviews/${content.reviewId}`, config
-        ).then(response => {
-            console.log(response);
+        ).then(() => {
+            props.getReviews();
         }).catch(err => {
             console.error(err);
         });
@@ -71,7 +65,9 @@ export default function ReviewCard(props){
                 <GameName>{content.gameName}</GameName>
             </HeaderContainer>
             <SecondaryContainer>
-                <Image src={content.boxArtUrl} />
+                <ImageContainer>
+                    <Image src={content.boxArtUrl} />
+                </ImageContainer>
                 <TextContainer>
                     <StarRating>{getStarRating(content.rating)}</StarRating>               
                     <ReviewHeader>{shortenString(content.reviewHeader, 20)}</ReviewHeader>
@@ -108,7 +104,7 @@ const ReviewHeader = styled.p({
 });
 
 const StarRating = styled.div({
-    color: "black",
+    color: "#ffff00",
 });
 
 const GameName = styled.p({
@@ -153,10 +149,10 @@ const ViewButton = styled.button({
     borderRadius: "5px",
     outline: "none",
     ':hover': {
-        backgroundColor: "#c981ff",
+        backgroundColor: "#b455fc",
     },
     ':active': {
-        backgroundColor: "#450079",
+        backgroundColor: "#450078",
     },
 });
 
@@ -172,10 +168,10 @@ const EditButton = styled.button({
     borderRadius: "5px",
     outline: "none",
     ':hover': {
-        backgroundColor: "#c981ff",
+        backgroundColor: "#b455fc",
     },
     ':active': {
-        backgroundColor: "#450079",
+        backgroundColor: "#450078",
     },
 });
 
@@ -198,10 +194,12 @@ const DeleteButton = styled.button({
     },
 });
 
+const color = "#bd99db";
+
 const Card = styled.div({
     width: "300px",
     height: "160px",
-    backgroundColor: "dodgerblue",
+    backgroundColor: color,
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
@@ -216,28 +214,28 @@ const Card = styled.div({
     ':hover': {
         boxShadow: "0px 14px 23px -5px rgba(0,0,0,0.7)",
     },
+    borderRadius: "5px",
 });
 
 const TextContainer = styled.div({
     width: "75%",
     height: "100%",
-    backgroundColor: "dodgerblue",
+    backgroundColor: color,
 });
 
 const ImageContainer = styled.div({
-    width: "30%",
-
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    backgroundColor: "grey",
-});
-
-const Image = styled.img({
     height: "100px",
     padding: {
         top: "0px",
         right: "15px",
     },
+
+});
+
+const Image = styled.img({
+    height: "100px",
+
+    border: "1px solid black",
     
 });
+

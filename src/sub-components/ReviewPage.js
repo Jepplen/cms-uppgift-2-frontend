@@ -44,10 +44,36 @@ export default function ReviewCard(props){
     );
 }
 
+const color = "#bd99db";
+
+const PageTitle = styled.p({
+    textAlign: "center",
+    //width: "200px",
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+    animationName: {
+        from: {
+            transform: "translate(-100%, -60px)",
+
+        },
+        to: {
+            transform: "translate(-100%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
+    transform: "translateX(-100%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
+});
 
 const Container = styled.div({
     width: "90%",
-    backgroundColor: "dodgerblue",
+    backgroundColor: color,
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "space-between",
@@ -58,6 +84,7 @@ const Container = styled.div({
     padding: {
         xy: "10px"
     },
+    borderRadius: "5px",
 });
 
 const PrimaryContainer = styled.div({
@@ -69,7 +96,7 @@ const PrimaryContainer = styled.div({
     padding: {
         xy: "10px"
     },
-    backgroundColor: "chocolate",
+    backgroundColor: color,
 });
 
 const SecondaryContainer = styled.div({
@@ -81,7 +108,7 @@ const SecondaryContainer = styled.div({
     padding: {
         xy: "10px"
     },
-    backgroundColor: "beige",
+    backgroundColor: color,
 });
 
 const GameName = styled.p({
@@ -101,18 +128,19 @@ const RatingContainer = styled.div({
     flexDirection: "row",
     padding: {xy: "5px"},
     boxSizing: "border-box",
-    backgroundColor: "green",
+    backgroundColor: color,
+    color: "#ffff00",
 });
 
 const ImageContainer = styled.div({
     width: "100%",
     height: "80%",
-    backgroundColor: "blue",
+    backgroundColor: color,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "column",
-    border: "black solid 1px",
+    
     boxSizing: "border-box",
 
     // padding: {
@@ -123,9 +151,10 @@ const ImageContainer = styled.div({
 
 const Img = styled.img({
     height: "12rem",
-    padding: {
+    margin: {
         bottom: "1.5rem",
-    }
+    },
+    border: "1px solid black",
 });
 
 const HeaderContainer = styled.div({
@@ -143,6 +172,7 @@ const HeaderText = styled.p({
     fontSize: "20px",
     padding: {
         left: "10px",
+        bottom: "10px",
     },
     boxSizing: "border-box",
 });

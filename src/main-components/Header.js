@@ -1,5 +1,5 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useState} from "react";
+import {Link, Redirect} from "react-router-dom";
 import { styled } from '@glitz/react';
 import CookieService from "../services/CookieService";
 import IconLogo from "../resources/icon_logo.png";
@@ -8,22 +8,9 @@ import Logo from "../resources/logo.png";
 //let cookie = browser.cookies.onChanged.addListener(CookieService.get("access_token"));
 
 export default function Header(props){
-//const [loggedIn, setLoggedIn] = useState(props.isAuthed);
-    //const [redirect, setRedirect] = useState(false);
-
-    // useEffect(() => {
-    //     setIsAuthed(props.isAuthed);
-    // },[props.isAuthed]);
-
     function handleLogout(){
         CookieService.remove("access_token");
-        //setLoggedIn(false;)
     }
-
-    // if (!loggedIn){
-    //     return <Redirect to="/" />
-    // }
-    console.log(props)
 
     return(
         <Content>
@@ -35,32 +22,35 @@ export default function Header(props){
             <LogoBox>
                 <LogoImg src={Logo}/>
             </LogoBox>
-            <NavBox>                   
-            <NavReviews>
-            <Link to="create-review">
-                    <Button>Write a review</Button>
-                </Link>
-            {props.isAuthed ?
-                <Link to="my-reviews">
-                    <Button>My reviews</Button>
-                </Link>
+            <NavBox>    
+            {!props.isAuthed ?               
+                <NavReviews>
+                    <Link to="create-review">
+                        <Button>Write a review</Button>
+                    </Link>
+                </NavReviews>
                 :
-                null
-            }
-                
-            </NavReviews>
-                {props.isAuthed ? 
-                <Link>
-                    <LogButton onClick={handleLogout}>
-                        Logout
-                    </LogButton>
+                <NavReviews>
+                    <Link to="my-reviews">
+                        <Button>My reviews</Button>
                     </Link>
-                : 
-                    <Link to="login">
-                        <LogButton>Login</LogButton>
+                    <Link to="create-review">
+                    <Button>Write a review</Button>
                     </Link>
+                </NavReviews>
                 }
-            
+                    {props.isAuthed ? 
+                    <Link>
+                        <LogButton onClick={handleLogout}>
+                            Logout
+                        </LogButton>
+                        </Link>
+                    : 
+                        <Link to="login">
+                            <LogButton>Login</LogButton>
+                        </Link>
+                    }
+                
             </NavBox>
             {props.isAuthed ? <LoggedInUser>Hello {props.userData}</LoggedInUser> : null}
         </Content>
@@ -96,7 +86,7 @@ const ButtonLogo = styled.button({
     borderRadius: "5px",
     outline: "none",
     ':active': {
-        backgroundColor: "#450079",
+        backgroundColor: "#450078",
     },
     margin: {
         x: "10px",
@@ -122,7 +112,7 @@ const Button = styled.button({
         backgroundColor: "#c981ff",
     },
     ':active': {
-        backgroundColor: "#450079",
+        backgroundColor: "#450078",
     },
     margin: {
         x: "10px",
@@ -145,7 +135,7 @@ const LogButton = styled.button({
         backgroundColor: "#c981ff",
     },
     ':active': {
-        backgroundColor: "#450079",
+        backgroundColor: "#450078",
     },
     margin: {
         x: "10px",
@@ -213,11 +203,9 @@ const LoginButton = styled.button({
 
 
 const NavReviews = styled.div({
-    width: "15vw",
+    width: "21vw",
     height: "100%",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     alignItems: "center",
-    //flexDirection: "row",
-
 });

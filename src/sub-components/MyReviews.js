@@ -7,26 +7,24 @@ import CookieService from "../services/CookieService";
 
 
 export default function MyReviews(props){
-    //const [reviewIds, setReviewIds] = useState([]);
     const [reviews, setReviews] = useState([]);
 
-
-
     useEffect(() => {
+        getReviews();
+    },[]);
+
+
+    function getReviews(){
         const config = {
             headers: { Authorization: `Bearer ${props.token}` }
         };
-
-        console.log(props.token);
-        console.log(props.userData.profileId);
         axios.get(`/profiles/${props.userData.profileId}`, config
         ).then(response => {
-            console.log("HERE 2")
             setReviews(response.data.reviews);
         }).catch(err => {
             console.error(err);
         });
-    },[]);
+    }
 
 
     if (!props.isAuthed){
@@ -34,6 +32,7 @@ export default function MyReviews(props){
     }
 
     if(!reviews){
+        console.log("DDDDDDDDDDDDDDDDD")
         return <div />
     }
     
@@ -45,7 +44,12 @@ export default function MyReviews(props){
             </PageTitleContainer>
             {reviews.length > 0 ?
                 <ContentBox>
-                    {reviews.map(review => <ReviewCard review={review} token={props.token} userData={props.userData} />)}
+                    {reviews.map(review => <ReviewCard 
+                        review={review}
+                        token={props.token}
+                        userData={props.userData}
+                        getReviews={getReviews}
+                        />)}
                 </ContentBox>
                 :
                 <ContentBoxEmpty>
@@ -61,6 +65,8 @@ export default function MyReviews(props){
         </Container> 
     );
 }
+
+
 
 const PageTitleContainer = styled.div({
     width: "100%",

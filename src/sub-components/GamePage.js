@@ -2,22 +2,24 @@ import React, {useState, useEffect} from "react";
 import {styled} from "@glitz/react";
 import axios from "axios";
 import {getStarRating, getFormatDate, shortenString, getAverageStarRating} from "../shared/utilities";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 export default function GamePage(props){
     const [rating, setRating] = useState(null);
-    console.log(props);
     const [game, setGame] = useState(null);
-    const [genre,] = useState(props.location.state.genre);
 
     useEffect(() => {
-        getGame();
-    },[props.location.state.game.id]);
+        if (props.location.state){
+            getGame();
+        } 
+    },[props.location.state && props.location.state.game.id]);
 
     function getGame(){
         axios.get(`/games/${props.location.state.game.id}`
         ).then((response) => {
-            setGame(response.data);
+            let game = response.data;
+            game.reviews.sort((a, b) => (a.published_at < b.published_at) - (a.published_at > b.published_at));
+            setGame(game);
             setRating(getAverageStarRating(response.data.reviews));
         }).catch((err) => {
             console.error(err);
@@ -28,29 +30,48 @@ export default function GamePage(props){
         return <div />;
     }
 
-    console.log(props)
     return(
         <SuperContainer>
             <PageTitle>{game.title}</PageTitle>
             <Container>
             
             <GameContainer>
-                <GameTitle>{game.title}</GameTitle>
-                {!!game.reviews.length && 
+                    <GameTitle>{game.title}</GameTitle>
+                {!!game.reviews.length ? 
                     <RatingContainer>
                         <RatingAveraged>{rating.rating}</RatingAveraged>
                         <RatingAveragedText>{game.reviews.length} review{game.reviews.length > 1 ? "s" : ""} (average score {rating.average})</RatingAveragedText>
                     </RatingContainer>
+                    :
+                    <RatingContainer>
+                        <RatingAveragedText>(This game has not been rated yet)</RatingAveragedText>
+                    </RatingContainer>
                 }
-                <BoxArtImg src={game.box_art.url}/>
+                <BoxArtContainer>
+                    <BoxArtImg src={game.box_art.url}/>
+                </BoxArtContainer>
                 <GameDescription>{game.description}</GameDescription>
             </GameContainer>
             <ReviewContainer>
+                {!!game.reviews.length && 
+                <NewReviewContainer>
+                    <NewReviewText></NewReviewText>
+                    <Link to={{
+                        pathname: "/create-review",
+                        state: { content: game }
+                        }}
+                    >
+                        <NewReviewButtonSmall>New review</NewReviewButtonSmall>
+                    </Link>
+                </NewReviewContainer> 
+                }
                 {!!game.reviews.length ?
                         game.reviews.map(review => 
                             <ReviewCard key={review.id + review.title}>
-                                    <ReviewRating>{getStarRating(review.rating)}</ReviewRating>
+                                <GameTitleContainer>
                                     <ReviewTitle>{review.title}</ReviewTitle>
+                                    <ReviewRating>{getStarRating(review.rating)}</ReviewRating>
+                                </GameTitleContainer>
                                 <ReviewAuthorDate>
                                     <ReviewAuthor>Review by {review.owner}</ReviewAuthor>
                                     <ReviewDate>Published {getFormatDate(review.published_at)}</ReviewDate>
@@ -77,6 +98,21 @@ export default function GamePage(props){
         </SuperContainer> 
     );
 }
+
+const NewReviewText = styled.p({
+  
+});
+
+const NewReviewContainer = styled.div({
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    margin: {
+        bottom: "10px",
+    },
+});
+
+const color = "#bd99db";
 
 const SuperContainer = styled.div({
     display: "flex",
@@ -128,6 +164,25 @@ const NewReviewButton = styled.button({
     },
 });
 
+const NewReviewButtonSmall = styled.button({
+    margin: {
+        top: "10px",
+    },
+    width: "100px",
+    height: "25px",
+    backgroundColor: "#9100ff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    outline: "none",
+    ':hover': {
+        backgroundColor: "#c981ff",
+    },
+    ':active': {
+        backgroundColor: "#450079",
+    },
+});
+
 const Container = styled.div({
     display: "flex",
     justifyContent: "space-between",
@@ -156,12 +211,30 @@ const GameContainer = styled.div({
     },
 });
 
+const GameTitleContainer = styled.div({
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    padding: {
+        x: "10px",
+        y: "10px",
+    },
+    margin: {
+        bottom: "10px",
+    },
+    boxSizing: "border-box",
+    //border: "1px solid black",
+    backgroundColor: color,
+    //filter: "brightness(85%)",
+    borderBottom: "1px solid black",
+});
+
 const GameTitle = styled.p({
     fontSize: "20px",
     margin: {
         bottom: "15px",
     },
-
 });
 
 const GameDescription = styled.p({
@@ -169,11 +242,25 @@ const GameDescription = styled.p({
 
 });
 
-const BoxArtImg = styled.img({
-    height: "200px",
+const BoxArtContainer = styled.div({
     margin: {
         bottom: "25px",
     },
+});
+
+const BoxArtImg = styled.img({
+    height: "200px",
+    border: "1px solid black",
+    animationName: {
+        from: {
+            transform: "scaleX(0)",
+        },
+        to: {
+            transform: "scaleX(1)",
+        },
+    },
+    animationDuration: "1s",
+    transform: "scale(1)",
 });
 
 const ReviewContainer = styled.div({
@@ -188,6 +275,8 @@ const ReviewContainer = styled.div({
     },
 });
 
+
+
 const ReviewCard = styled.div({
     display: "flex",
     flexDirection: "column",
@@ -201,9 +290,8 @@ const ReviewCard = styled.div({
     },
     boxSizing: "border-box",
     //border: "1px solid black",
-    backgroundColor: "#e8aa61",
+    backgroundColor: color,
     //filter: "brightness(85%)",
-    border: "1px solid white",
     borderRadius: "10px",
 });
 
@@ -216,25 +304,30 @@ const ReviewAuthorDate = styled.div({
     justifyContent: "space-between",
     with: "100%",
     padding: {
+        x: "10px",
         bottom: "10px",
     },
-    borderBottom: "1px solid grey",
+   // borderBottom: "1px solid grey",
 });
 const ReviewAuthor = styled.p({
     width: "70%",
+    fontStyle: "italic",
 });
 
 const ReviewDate = styled.p({
     width: "30%",
+    fontStyle: "italic",
 });
 
 const ReviewTitleRating = styled.div({
     display: "flex",
-    with: "100%",
+    flexDirection: "row",
+    width: "100%",
 });
 
 const ReviewRating = styled.div({
     width: "125px",
+    color: "yellow",
 });
 
 const ReviewContent = styled.p({
@@ -275,7 +368,8 @@ const NoReviewCard = styled.div({
         bottom: "10px",
     },
     boxSizing: "border-box",
-    border: "1px solid black",
+    borderRadius: "5px",
+    backgroundColor: color,
 });
 
 const NoReview = styled.p({

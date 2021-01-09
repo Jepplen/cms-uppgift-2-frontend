@@ -32,14 +32,18 @@ export default function Home(props){
             <ReviewContainer>
                 {state.reviews.map(review =>
                     <ReviewCard>
-                        <BoxArt src={review.game.box_art.url} />
+                        <BoxArtContainer>
+                            <BoxArt src={review.game.box_art.url} />
+                        </BoxArtContainer>
                         <ReviewColumn>
-                            <ReviewRating>{getStarRating(review.rating)}</ReviewRating>
-                                    <ReviewTitle>{review.title}</ReviewTitle>
-                                <ReviewAuthorDate>
-                                    <ReviewAuthor>Review by {review.owner}</ReviewAuthor>
-                                    <ReviewDate>Published {getFormatDate(review.published_at)}</ReviewDate>
-                                </ReviewAuthorDate>
+                            <GameTitleContainer>
+                                <ReviewRating>{getStarRating(review.rating)}</ReviewRating>
+                                <ReviewTitle>{review.title}</ReviewTitle>  
+                            </GameTitleContainer>
+                            <ReviewAuthorDate>
+                                <ReviewAuthor>Review by {review.owner}</ReviewAuthor>
+                                <ReviewDate>Published {getFormatDate(review.published_at)}</ReviewDate>
+                            </ReviewAuthorDate>
                             <ReviewContent>{review.review_content}</ReviewContent>
                         </ReviewColumn>   
                     </ReviewCard>
@@ -48,6 +52,8 @@ export default function Home(props){
         </Container>
     );
 }
+
+const color = "#bd99db";
 
 const ReviewContent = styled.p({
     padding: {
@@ -58,12 +64,13 @@ const ReviewContent = styled.p({
 const ReviewRating = styled.div({
     width: "125px",
     marginTop: "10px",
+    marginLeft: "-5px",
 });
 
 const ReviewTitle = styled.p({
-    fontSize: "20px",
+    fontSize: "18px",
     margin: {
-        bottom: "10px",
+        bottom: "0px",
     },
 });
 
@@ -73,17 +80,38 @@ const ReviewAuthorDate = styled.div({
     width: "98%",
     padding: {
         bottom: "10px",
+        left: "13px",
     },
-    borderBottom: "1px solid grey",
+
 });
 const ReviewAuthor = styled.p({
     width: "70%",
+    fontStyle: "italic",
 });
 
 const ReviewDate = styled.p({
     width: "30%",
+    fontStyle: "italic",
 });
 
+const GameTitleContainer = styled.div({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    width: "98%",
+    padding: {
+        x: "10px",
+        bottom: "10px",
+    },
+    margin: {
+        bottom: "10px",
+    },
+    boxSizing: "border-box",
+    //border: "1px solid black",
+    backgroundColor: color,
+    //filter: "brightness(85%)",
+    borderBottom: "1px solid black",
+});
 
 
 const PageTitle = styled.p({
@@ -111,13 +139,15 @@ const PageTitle = styled.p({
     borderTop: "1px solid #E1E1E1",
 });
 
+const BoxArtContainer = styled.div({
+    margin: {
+        xy: "15px",
+    },
+});
 
 const BoxArt = styled.img({
     height: "150px",
-    padding: {
-        xy: "15px",
-    },
-    boxSizing: "border-box",
+    border: "1px solid black",
 });
 
 const Container = styled.div({
@@ -155,8 +185,8 @@ const ReviewCard = styled.div({
     //boxSizing: "border-box",
     boxSizing: "border-box",
     //border: "1px solid black",
-    backgroundColor: "#ffca7c",
+    backgroundColor: color,
     //filter: "brightness(85%)",
-    border: "1px solid white",
+    //border: "1px solid white",
     borderRadius: "10px",
 });

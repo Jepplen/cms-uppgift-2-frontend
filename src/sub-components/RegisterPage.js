@@ -79,7 +79,7 @@ export default function RegisterPage(props){
 
     return(
         <ContentBox>
-            {!props.isAuthed ? <Register>Register a new account</Register> : null}
+            <PageTitle>Register a new account</PageTitle>
             {props.isAuthed ? 
                 <Blank>
                     <Text>Great! Now you can start writing reviews.</Text>
@@ -124,7 +124,7 @@ export default function RegisterPage(props){
                             onChange={onChange}
                         />*/}
                         <LoginButton type="submit">Register</LoginButton>
-                        <Link to="/login"><p>Already have an account? Login</p></Link>
+                        <Link to="/login"><LinkText>Already have an account?</LinkText></Link>
                     </FormBox>
                 </Form>
             }
@@ -132,6 +132,40 @@ export default function RegisterPage(props){
     );
 }
 
+const LinkText = styled.p({
+    width: "100%",
+    padding: {
+        top: "10px",
+        left: "15%",
+    },
+    fontSize: "14px",
+});
+
+const PageTitle = styled.p({
+    textAlign: "center",
+    width: "20%",
+    //width: "200px",
+    padding: {
+        x: "15px",
+        y: "15px",
+    },
+    animationName: {
+        from: {
+            transform: "translate(-49%, -60px)",
+
+        },
+        to: {
+            transform: "translate(-49%, 0px)",
+        },
+    },
+    animationDuration: "1s",
+    backgroundColor: "#2A2A2A",
+    color: "#E1E1E1",
+    transform: "translateX(-49%)",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    borderTop: "1px solid #E1E1E1",
+});
 
 
 const Button = styled.button({
@@ -191,7 +225,7 @@ const InputField = styled.input({
 const Form = styled.form({
     margin: {
         right: "20%",
-        top: "50px",
+        top: "125px",
     },
 });
 
