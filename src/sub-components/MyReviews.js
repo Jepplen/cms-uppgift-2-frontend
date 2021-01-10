@@ -1,16 +1,15 @@
-import react,{useState, useEffect} from "react";
+import React,{useState, useEffect} from "react";
 import ReviewCard from "./ReviewCard";
 import {Link, Redirect} from "react-router-dom";
 import { styled } from '@glitz/react';
 import axios from "axios";
-import CookieService from "../services/CookieService";
-
 
 export default function MyReviews(props){
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         getReviews();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
 
@@ -32,7 +31,6 @@ export default function MyReviews(props){
     }
 
     if(!reviews){
-        console.log("DDDDDDDDDDDDDDDDD")
         return <div />
     }
     

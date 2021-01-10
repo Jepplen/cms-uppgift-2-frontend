@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {styled} from "@glitz/react";
 import axios from "axios";
-import {getStarRating, getFormatDate, shortenString, getAverageStarRating} from "../shared/utilities";
-import {Link, Redirect} from "react-router-dom";
+import {getStarRating, getFormatDate, getAverageStarRating} from "../shared/utilities";
+import {Link} from "react-router-dom";
 
 export default function GamePage(props){
     const [rating, setRating] = useState(null);
@@ -10,12 +10,7 @@ export default function GamePage(props){
 
     useEffect(() => {
         if (props.location.state){
-            getGame();
-        } 
-    },[props.location.state && props.location.state.game.id]);
-
-    function getGame(){
-        axios.get(`/games/${props.location.state.game.id}`
+            axios.get(`/games/${props.location.state.game.id}`
         ).then((response) => {
             let game = response.data;
             game.reviews.sort((a, b) => (a.published_at < b.published_at) - (a.published_at > b.published_at));
@@ -24,7 +19,20 @@ export default function GamePage(props){
         }).catch((err) => {
             console.error(err);
         });
-    }
+        } 
+    },[props.location.state]);
+
+    // function getGame(){
+    //     axios.get(`/games/${props.location.state.game.id}`
+    //     ).then((response) => {
+    //         let game = response.data;
+    //         game.reviews.sort((a, b) => (a.published_at < b.published_at) - (a.published_at > b.published_at));
+    //         setGame(game);
+    //         setRating(getAverageStarRating(response.data.reviews));
+    //     }).catch((err) => {
+    //         console.error(err);
+    //     });
+    // }
 
     if (!game || !rating){
         return <div />;
@@ -317,12 +325,6 @@ const ReviewAuthor = styled.p({
 const ReviewDate = styled.p({
     width: "30%",
     fontStyle: "italic",
-});
-
-const ReviewTitleRating = styled.div({
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
 });
 
 const ReviewRating = styled.div({

@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { styled } from '@glitz/react';
 import axios from "axios";
 import {getStarRating, getFormatDate, shortenString} from "../shared/utilities";
-import {Redirect, Link} from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export default function ReviewCard(props){
-    console.log(props);
-    console.log(props.review);
     const [content, setContent] = useState({
         author: props.userData.username,
         gameName: props.review.game_name,
@@ -26,6 +24,7 @@ export default function ReviewCard(props){
 
     useEffect(() => {
         getBoxArt();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     function getBoxArt(){

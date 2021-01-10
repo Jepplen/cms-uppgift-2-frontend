@@ -6,7 +6,6 @@ import CookieService from "../services/CookieService";
 import DropDown from "../shared/DropDown";
 
 export default function CreateReviewPage(props){
-    console.log(props);
     const [games, setGames] = useState([]);
     const [content,] = useState(props.location.state ? props.location.state.content : "");
     const [success, setSuccess] = useState(false);
@@ -25,7 +24,7 @@ export default function CreateReviewPage(props){
         if (props.isAuthed){
             GetGames();
         }
-    },[]);
+    },[props.isAuthed]);
 
     function handleChange (e) {
         let value = e.target.value;
@@ -93,9 +92,7 @@ export default function CreateReviewPage(props){
     }
 
     function handleDropDownValueChange(game){
-        console.log(game);
-        setState({...state, game: game});
-        
+        setState({...state, game: game}); 
     }
 
     if (success){
@@ -191,14 +188,6 @@ const PageTitle = styled.p({
 const AltText = styled.p({
     margin: {
         top: "175px",
-        right: "20%",
-    },
-});
-
-const Header = styled.p({
-    fontSize: "25px",
-    margin: {
-        top: "20px",
         right: "20%",
     },
 });

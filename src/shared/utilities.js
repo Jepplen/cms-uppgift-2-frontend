@@ -5,12 +5,12 @@ import StarHalfIcon from '@material-ui/icons/StarHalf';
 export const getStarRating = (rating) => {
     let starArray = [];
     for (let i = 0; i < rating; i++) {
-        starArray.push(<StarFullIcon />);
+        starArray.push(<StarFullIcon key={Math.random()}/>);
     } 
 
     if (rating < 5){
         for (let i = 0; i < (5 - rating); i++) {
-            starArray.push(<StarEmptyIcon />)
+            starArray.push(<StarEmptyIcon key={Math.random()}/>)
         }
     }
     return starArray;
@@ -45,13 +45,13 @@ export const getAverageStarRating = (reviews) => {
     let starArray = [];
 
     for (let i = 0; i < floorInt; i++) {
-        starArray.push(<StarFullIcon />);
+        starArray.push(<StarFullIcon key={Math.random()}/>);
     } 
 
     if (rest > 0 && rest < 0.5) {
-        starArray.push(<StarEmptyIcon />)
+        starArray.push(<StarEmptyIcon key={Math.random()}/>)
     } else if (rest >= 0.5 && rest < 1){
-        starArray.push(<StarHalfIcon />);
+        starArray.push(<StarHalfIcon key={Math.random()}/>);
     } else {
         // Do nothing
     }
@@ -60,7 +60,7 @@ export const getAverageStarRating = (reviews) => {
 
     if (emptySpaces < 5){
         for (let i = 0; i < (5 - emptySpaces); i++) {
-            starArray.push(<StarEmptyIcon />)
+            starArray.push(<StarEmptyIcon key={Math.random()}/>)
         }
     }
 

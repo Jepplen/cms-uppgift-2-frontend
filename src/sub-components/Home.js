@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { styled } from '@glitz/react';
-import {getStarRating, getFormatDate, shortenString, getAverageStarRating} from "../shared/utilities";
+import {getStarRating, getFormatDate} from "../shared/utilities";
 
 export default function Home(props){
     const [state, setState] = useState({
@@ -10,6 +10,11 @@ export default function Home(props){
     });
 
     useEffect(() => {
+        getReviews();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+
+    function getReviews(){
         axios.get("/reviews")
         .then((response) => {
             let all = response.data;
@@ -20,10 +25,7 @@ export default function Home(props){
         .catch((err) => {
             console.error(err);
         });
-    },[]);
-
-
-    console.log(state.reviews);
+    }
 
     return(
         <Container>
@@ -31,7 +33,7 @@ export default function Home(props){
             <PageHeader>Latest reviews</PageHeader>
             <ReviewContainer>
                 {state.reviews.map(review =>
-                    <ReviewCard>
+                    <ReviewCard key={review.id}>
                         <BoxArtContainer>
                             <BoxArt src={review.game.box_art.url} />
                         </BoxArtContainer>
@@ -177,7 +179,6 @@ const ReviewColumn = styled.div({
 const ReviewCard = styled.div({
     width: "80%",
     display: "flex",
-    backgroundColor: "white",
     margin: {
         x: "10%",
         y: "20px",

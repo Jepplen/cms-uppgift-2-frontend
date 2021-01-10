@@ -8,9 +8,7 @@ import {Link} from "react-router-dom";
 import { styled } from '@glitz/react';
 
 
-
 export default function CustomizedAccordions(props) {
-    console.log(props);
   const [expanded, setExpanded] = useState("");
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -51,9 +49,7 @@ export default function CustomizedAccordions(props) {
 
 
 const GameButton = styled.button({
-
   textAlign: "left",
-
     margin: {
         top: "0px",
     },

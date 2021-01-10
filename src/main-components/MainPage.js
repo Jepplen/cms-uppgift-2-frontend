@@ -30,6 +30,12 @@ export default function MainPage(props) {
   });
 
   useEffect(() => {
+    cookieJar();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+
+  function cookieJar(){
     let current_cookie = document.cookie;
     setInterval(() => {
       if (current_cookie !== document.cookie) {
@@ -38,12 +44,10 @@ export default function MainPage(props) {
       }
     }, 500);
 
-    console.log(isAuthed, !!userData.profileId);
-
     if (isAuthed && !userData.profileId){
       getUserData();
     }
-  },[]);
+  }
 
   const changedCookie = () => {
     console.log("COOKIE HAS CHANGED");
@@ -52,7 +56,6 @@ export default function MainPage(props) {
   };
 
   const updateUserData = (data) => {
-    console.log(data);
     setUserData({
       username: data.username,
       email: data.email,
@@ -63,14 +66,12 @@ export default function MainPage(props) {
   };
 
   function getUserData(){
-    console.log("NEW: " + token);
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
 
     axios.get("/users/me", config
         ).then((response) => {
-            console.log(response);
             getProfileData(response.data.profile);
         }).catch(error => {
             console.log(error);
@@ -84,8 +85,6 @@ export default function MainPage(props) {
 
     axios.get(`/profiles/${profileId}`, config
     ).then((response) => {
-        console.log(response);
-
         const data = {
           userId: response.data.author.id,
           email: response.data.author.email,
@@ -93,7 +92,6 @@ export default function MainPage(props) {
           username: response.data.author.username,
           description: response.data.profile_description,
         };
-
         updateUserData(data);
     }).catch(error => {
         console.log(error);
@@ -101,7 +99,6 @@ export default function MainPage(props) {
   }
   
   return (
-    
       <Router>
         <Header isAuthed={isAuthed} token={token} userData={userData.username}/>
         <PrimaryContent>

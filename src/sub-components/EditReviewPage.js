@@ -7,7 +7,6 @@ import DropDown from "../shared/DropDown";
 
 export default function EditReviewPage(props){
     const [content,] = useState(props.location.state.content);
-    console.log(props);
     const [games, setGames] = useState([]);
     const [success, setSuccess] = useState(false);
     const [state, setState] = useState({
@@ -25,7 +24,7 @@ export default function EditReviewPage(props){
         if (props.isAuthed){
             GetGames();
         }
-    },[]);
+    },[props.isAuthed]);
 
     function handleChange (e) {
         let value = e.target.value;
@@ -36,7 +35,6 @@ export default function EditReviewPage(props){
 
             if(!reg.test(value)){
                 value = "";
-                console.log("DSAD");
             } else {
                 if (value > 5){
                     value = 5;

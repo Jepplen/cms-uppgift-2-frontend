@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled } from '@glitz/react';
-import axios from "axios";
 import {getStarRating, getFormatDate} from "../shared/utilities";
 //import { id } from "date-fns/locale";
 // import {Link} from "react-router-dom";
 
 export default function ReviewCard(props){
     const [content,] = useState(props.location.state.content);
-    console.log(content)
 
     return(
         <Container>
@@ -46,30 +44,7 @@ export default function ReviewCard(props){
 
 const color = "#bd99db";
 
-const PageTitle = styled.p({
-    textAlign: "center",
-    //width: "200px",
-    padding: {
-        x: "15px",
-        y: "15px",
-    },
-    animationName: {
-        from: {
-            transform: "translate(-100%, -60px)",
 
-        },
-        to: {
-            transform: "translate(-100%, 0px)",
-        },
-    },
-    animationDuration: "1s",
-    backgroundColor: "#2A2A2A",
-    color: "#E1E1E1",
-    transform: "translateX(-100%)",
-    borderBottomLeftRadius: "5px",
-    borderBottomRightRadius: "5px",
-    borderTop: "1px solid #E1E1E1",
-});
 
 const Container = styled.div({
     width: "90%",

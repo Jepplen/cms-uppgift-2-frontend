@@ -7,7 +7,6 @@ import CookieService from "../services/CookieService";
 import {updateToken} from "../services/store.js";
 
 export default function RegisterPage(props){
-    //const [token, setToken] = useState(CookieService.get("access_token"));
     const [state, setState] = useState({
         username: "",
         email: "",
@@ -36,13 +35,11 @@ export default function RegisterPage(props){
             const token = response.data.jwt;
             CookieService.set("access_token", token);
             updateToken(token);
-            //setToken(token);
             createProfile({token: token, userId: response.data.user.id});
         })
         .catch(error => {
             console.log(error);
         });
-        //setState({username: "", email: "", password: ""});
     }
 
     function createProfile(args){
@@ -53,14 +50,11 @@ export default function RegisterPage(props){
         const bodyParameters = {
             profile_name: state.username,
             profile_description: state.profile_description,
-            //profile_picture: state.profile_picture ? state.profile_picture : DefaultProfilePicture
         };
 
         axios.post("/profiles", bodyParameters, config
         ).then((response) => {
-            console.log(response);
             updateUserData(response.data);
-            //addProfilePicture({token: args.token, userId: args.userId, profileId: response.data.id})
         }).catch(error => {
             console.log(error);
         });
@@ -186,15 +180,6 @@ const Button = styled.button({
         backgroundColor: "#450079",
     },
 });
-
-const Register = styled.p({
-    fontSize: "25px",
-    margin: {
-        right: "20%",
-        top: "100px",
-    },
-});
-
 
 const ContentBox = styled.div({
     width: "100%",

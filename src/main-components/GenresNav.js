@@ -1,15 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 import { styled } from '@glitz/react';
 import axios from "axios";
 import Accordion from "../shared/Accordion";
 
 export default function GenresNav(){
     const [genres, setGenres] = useState([]);
-    const [state, setState] = useState({
-
-    });
-
+    
     useEffect(() => {
         getGenres();
     },[]);
@@ -22,8 +18,6 @@ export default function GenresNav(){
             for (let genre of sortedGenres){
                 genre.games.sort((a, b) => (a.title > b.title) - (a.title < b.title));
             }
-
-            console.log(sortedGenres);
             setGenres(sortedGenres);
         }).catch((err) => {
             console.error(err);

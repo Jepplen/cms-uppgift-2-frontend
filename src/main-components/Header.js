@@ -1,11 +1,9 @@
-import React, {useState} from "react";
-import {Link, Redirect} from "react-router-dom";
+import React from "react";
+import {Link} from "react-router-dom";
 import { styled } from '@glitz/react';
 import CookieService from "../services/CookieService";
-import IconLogo from "../resources/icon_logo.png";
 import BobOmb from "../resources/bob-omb.png";
 import Logo from "../resources/logo.png";
-//let cookie = browser.cookies.onChanged.addListener(CookieService.get("access_token"));
 
 export default function Header(props){
     function handleLogout(){
@@ -40,10 +38,10 @@ export default function Header(props){
                 </NavReviews>
                 }
                     {props.isAuthed ? 
-                    <Link>
-                        <LogButton onClick={handleLogout}>
-                            Logout
-                        </LogButton>
+                        <Link to="/#">
+                            <LogButton onClick={handleLogout}>
+                                Logout
+                            </LogButton>
                         </Link>
                     : 
                         <Link to="login">
@@ -75,11 +73,7 @@ const IconLogoImg = styled.img({
     width: "75px"
 });
 
-const ButtonLogo = styled.button({
-    margin: {
-        top: "10px",
-    },
-    
+const ButtonLogo = styled.button({    
     backgroundColor: "#9100ff",
     color: "white",
     border: "none",
@@ -89,6 +83,7 @@ const ButtonLogo = styled.button({
         backgroundColor: "#450078",
     },
     margin: {
+        top: "10px",
         x: "10px",
     },
     padding: {
@@ -98,9 +93,6 @@ const ButtonLogo = styled.button({
 });
 
 const Button = styled.button({
-    margin: {
-        top: "10px",
-    },
     width: "120px",
     height: "25px",
     backgroundColor: "#9100ff",
@@ -115,15 +107,13 @@ const Button = styled.button({
         backgroundColor: "#450078",
     },
     margin: {
+        top: "10px",
         x: "10px",
     },
     cursor: "pointer",
 });
 
 const LogButton = styled.button({
-    margin: {
-        top: "10px",
-    },
     width: "120px",
     height: "25px",
     backgroundColor: "#9100ff",
@@ -138,6 +128,7 @@ const LogButton = styled.button({
         backgroundColor: "#450078",
     },
     margin: {
+        top: "10px",
         x: "10px",
     },
     cursor: "pointer",
@@ -193,14 +184,6 @@ const NavBox = styled.div({
     fontSize: '18px',
     color: "white",
 });
-
-const LoginButton = styled.button({
-   width: "100px",
-   margin: {
-       right: "50px",
-   },
-});
-
 
 const NavReviews = styled.div({
     width: "21vw",

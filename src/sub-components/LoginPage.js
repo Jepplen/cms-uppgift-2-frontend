@@ -10,11 +10,7 @@ export default function LoginPage(props){
     const [state, setState] = useState({
         user: "",
         password: "",
-      })
-
-    // useEffect(() => {
-    //     setToken(props.isAuthed);
-    // },[props.isAuthed]);
+      });
 
     function onChange(e) {
         const value = e.target.value;
@@ -31,11 +27,9 @@ export default function LoginPage(props){
             password: state.password,
         })
         .then(response => {
-            console.log(response);
             const token = response.data.jwt;
             CookieService.set("access_token", token);
             updateUserData(response.data);
-            console.log(response);
         })
         .catch(error => {
             console.log(error);
@@ -130,15 +124,6 @@ const LoginText = styled.p({
         top: "150px",
     },
 });
-
-const Login = styled.p({
-    fontSize: "25px",
-    margin: {
-        right: "20%",
-        top: "100px",
-    },
-});
-
 
 const ContentBox = styled.div({
     width: "100%",
