@@ -16,7 +16,7 @@ export default function CreateReviewPage(props){
         content: "",
         rating: "",
         game: props.location.state ? props.location.state.content : "",
-        author: "Tjohej",
+        author: "",
         owner: "",
       });
 

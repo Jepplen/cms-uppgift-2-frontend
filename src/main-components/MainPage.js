@@ -135,5 +135,5 @@ const ContentBox = styled.div({
   display: "flex",
   flexDirection: "column",
   width: "85vw",
-  backgroundColor: "blanchedalmond"
+  backgroundColor: "rgba(0,0,0,0.1)",
 });
